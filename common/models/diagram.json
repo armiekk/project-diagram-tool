@@ -1,0 +1,19 @@
+{
+  "name": "Diagram",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "DIAGRAM_ID": {
+      "type": "string",
+      "id": true,
+      "generated": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

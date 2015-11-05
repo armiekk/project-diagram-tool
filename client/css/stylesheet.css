@@ -1,0 +1,55 @@
+.btn.btn-link.btn-sm.btn-cancel {
+  color: #0a6ebd;
+}
+.modal-overlay.ng-hide {
+  position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 99999;
+	opacity:0;
+}
+
+.modal-save.ng-hide {
+  position: fixed;
+	top: 250px;
+	right: 0;
+	bottom: 0;
+	left: 500px;
+	z-index: 99999;
+	opacity:0;
+}
+
+.modal-overlay {
+  visibility: visible;
+  position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 99999;
+	opacity:1;
+}
+
+.modal-save {
+  visibility: visible;
+  position: fixed;
+	top: 250px;
+	right: 0;
+	bottom: 0;
+	left: 500px;
+	z-index: 99999;
+	opacity:1;
+}
+
+.modal-overlay.ng-hide-add, .modal-overlay.ng-hide-remove {
+  transition: all 0.4s ease 0.1s;
+}
+.modal-save.ng-hide-add, .modal-save.ng-hide-remove {
+  transition: all 0.4s ease 0.1s;
+}
+
+.panel-heading.panel-heading-diagram {
+  padding-bottom: 5px;
+}

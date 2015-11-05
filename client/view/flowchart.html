@@ -1,0 +1,60 @@
+
+{{myDiagram.diagramName}}
+<div class="modal-overlay" ng-show="showModal" ng-click="showModal = !showModal"></div>
+<div class="modal-save" ng-show="showModal">
+  <div class="panel panel-primary" style="width: 300px;height: Auto;">
+    <div class="panel-heading">
+      <strong>Save Diagram</strong>
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="name">save diagram as...</label>
+        <input type="text" class="form-control" ng-model="myDiagram.diagramName" name="name" value="">
+      </div>
+      <div class="pull-right">
+        <button type="button"
+                class="btn btn-primary btn-sm"
+                name="button"
+                ng-click="saveModel(myDiagram)">save</button>
+        <button type="button"
+                class="btn btn-link btn-sm btn-cancel"
+                name="button"
+                 ng-click="showModal = !showModal">cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" style="margin-top: 20px;">
+  <div class="col-md-2">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <strong>Compenents</strong>
+      </div>
+      <div class="panel-body" id="leftPalette" style="width: Auto; height: 500px;"></div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="panel panel-primary">
+      <div class="panel-heading panel-heading-diagram">
+        <button class="btn btn-link btn-sm" id="new" name="button" ng-click="newDiagram()" type="button">new</button>
+        <button class="btn btn-link btn-sm" id="undo" name="button" ng-click="undoButton()" type="button">undo</button>
+        <button class="btn btn-link btn-sm" id="redo" name="button" ng-click="redoButton()" type="button">redo</button>
+        <div class="pull-right">
+          <button class="btn btn-link btn-sm" id="saveModel" name="button" ng-click="showModal = !showModal" type="button">save</button>
+          <button class="btn btn-link btn-sm" id="loadModel" name="button" ng-click="loadModel()" type="button">load</button>
+        </div>
+      </div>
+      <div class="panel-body" id="myDiagram" style="width: Auto; height: 500px;">
+        <!-- <div class="mdl-shadow--2dp" id="myDiagram" style="width: Auto; height: 500px;"></div> -->
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <strong>Your Diagram</strong>
+      </div>
+      <div class="panel-body" style="width: Auto; height: 500px;"></div>
+    </div>
+  </div>
+</div>
