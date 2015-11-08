@@ -2,6 +2,7 @@
   color: #0a6ebd;
 }
 .modal-overlay.ng-hide {
+  visibility: hidden;
   position: fixed;
 	top: 0;
 	right: 0;
@@ -12,11 +13,40 @@
 }
 
 .modal-save.ng-hide {
+  width: 300px;
+  height: 0px;
+  visibility: hidden;
   position: fixed;
 	top: 250px;
 	right: 0;
 	bottom: 0;
 	left: 500px;
+	z-index: 99999;
+	opacity:0;
+}
+
+.modal-import.ng-hide {
+  width: 500px;
+  height: 0px;
+  visibility: hidden;
+  position: fixed;
+	top: 250px;
+	right: 0;
+	bottom: 0;
+	left: 27%;
+	z-index: 99999;
+	opacity:0;
+}
+
+.modal-export.ng-hide {
+  width: 800px;
+  height: 0px;
+  visibility: hidden;
+  position: fixed;
+	top: 150px;
+	right: 0;
+	bottom: 0;
+	left: 17%;
 	z-index: 99999;
 	opacity:0;
 }
@@ -28,17 +58,46 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
+  background-color: rgba(50, 50, 50, 0.5);
 	z-index: 99999;
 	opacity:1;
 }
 
 .modal-save {
+  width: 300px;
+  height: 0px;
   visibility: visible;
   position: fixed;
-	top: 250px;
+	top: 200px;
 	right: 0;
 	bottom: 0;
 	left: 500px;
+	z-index: 99999;
+	opacity:1;
+}
+
+.modal-import {
+  width: 500px;
+  height: 0px;
+  visibility: visible;
+  position: fixed;
+	top: 200px;
+	right: 0;
+	bottom: 0;
+	left: 27%;
+	z-index: 99999;
+	opacity:1;
+}
+
+.modal-export {
+  width: 800px;
+  height: 0px;
+  visibility: visible;
+  position: fixed;
+	top: 100px;
+	right: 0;
+	bottom: 0;
+	left: 17%;
 	z-index: 99999;
 	opacity:1;
 }
@@ -49,7 +108,23 @@
 .modal-save.ng-hide-add, .modal-save.ng-hide-remove {
   transition: all 0.4s ease 0.1s;
 }
+.modal-import.ng-hide-add, .modal-import.ng-hide-remove {
+  transition: all 0.4s ease 0.1s;
+}
+.modal-export.ng-hide-add, .modal-export.ng-hide-remove {
+  transition: all 0.4s ease 0.1s;
+}
 
 .panel-heading.panel-heading-diagram {
   padding-bottom: 5px;
+}
+
+textarea.well {
+  margin: auto;
+  width: 100%;
+}
+
+input[type="file"] {
+  margin: auto;
+  width: 100%;
 }

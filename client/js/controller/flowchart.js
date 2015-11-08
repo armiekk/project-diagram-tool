@@ -2,60 +2,138 @@
   'use_strict';
 
   angular.module('app')
-    .controller("flowChartCtrl", ['Diagram', '$scope', '$log', flowChartCtrl]);
+    .controller("flowChartCtrl", ['Diagram', '$scope', '$log', '$window', 'FileUploader', '$http',
+    flowChartCtrl])
+    .controller;
 
-  function flowChartCtrl(Diagram, $scope, $log) {
+  function flowChartCtrl(Diagram, $scope, $log, $window, FileUploader, $http) {
+    // init function
     initGojs();
+    loadModelList();
+    // ------------------------------------------------------------
+    // properties
+    $scope.uploader = new FileUploader();
+    $scope.diagramList = [];
+    $scope.jsonDiagram;
+    $scope.importButton = true;
     $scope.myDiagram = {
+      userName : "nongarmza@gmail.com",
       diagramName : "",
       diagramDetail: []
     };
-    $scope.showModal = false;
-    $scope.newDiagram = function(){
+    $scope.modal = {
+      save : false,
+      overlay: false,
+      import: false,
+      export: false
+    };
+    $scope.newDiagram = newDiagram;
+    $scope.saveModel = saveModel;
+    $scope.loadModelList = loadModelList;
+    $scope.loadModel = loadModel;
+    $scope.undoButton = undoButton;
+    $scope.redoButton = redoButton;
+    $scope.saveAsModel = saveAsModel;
+    $scope.importModel = importModel;
+    $scope.exportModel = exportModel;
+    $scope.closeModal = closeModal;
+    // -----------------------------------------------------------
+    // function
+    function newDiagram(){
+      $scope.myDiagram = {
+        userName : "nongarmza@gmail.com",
+        diagramName : "",
+        diagramDetail: []
+      };
       $scope.diagram.model = new go.GraphLinksModel();
       $scope.diagram.model.linkFromPortIdProperty = "fromPort";
       $scope.diagram.model.linkToPortIdProperty = "toPort";
     }
-    $scope.saveModel = function(myDiagram) {
-      $log.info(myDiagram);
+    function saveAsModel(myDiagram){
       myDiagram.diagramDetail = $scope.diagram.model;
       Diagram.create(myDiagram, function(value, responseHeaders){
         $log.info(value);
         $scope.showModal = !$scope.showModal;
+        loadModelList();
       }, function(httpResponse){
         $log.info(httpResponse);
       });
     }
-    $scope.loadModel = function() {
-      Diagram.find({}, function(value, responseHeaders){
-        delete value.DIAGRAM_ID;
-        $scope.diagram.model = go.Model.fromJson(value[0].diagramDetail);
+    function loadModelList() {
+      Diagram.find({
+        where: {
+          userName : "nongarmza@gmail.com"
+        }
+      }, function(listValue, responseHeaders){
+        $scope.diagramList = listValue;
+      }, function(httpResponse){
+        $log.info(httpResponse);
+      });
+    }
+    function loadModel(dnParam){
+      $log.info(dnParam);
+      Diagram.findOne({
+        filter: {
+          where: {
+            diagramName: dnParam
+          }
+        }
+      }, function(value, responseHeaders){
+        $scope.myDiagram = value;
         $log.info(value);
-      }, function(httpResponse){
-        $log.info(httpResponse);
+        $scope.diagram.model = new go.GraphLinksModel();
+        $scope.diagram.model.linkFromPortIdProperty = "fromPort";
+        $scope.diagram.model.linkToPortIdProperty = "toPort";
+        $scope.diagram.model = go.Model.fromJson($scope.myDiagram.diagramDetail);
+      },
+      function(httpResponse){
+        $log.info("cannot load diagram");
       });
     }
-    $scope.undoButton = function(){
+    function undoButton(){
       if ($scope.diagram.model.undoManager.canUndo()) {
         $scope.diagram.model.undoManager.undo();
       }
     }
-    $scope.redoButton = function(){
+    function redoButton(){
       if ($scope.diagram.model.undoManager.canRedo()) {
         $scope.diagram.model.undoManager.redo();
       }
     }
-
-    $scope.diagram.model.addChangedListener(function(evt){
-      if (evt.isTransactionFinished) {
-        $log.info($scope.diagram.model.toJson());
+    function saveModel(myDiagram){
+      if (myDiagram.diagramName.length == 0) {
+        $scope.modal.save = !$scope.modal.save;
+        $scope.modal.overlay = !$scope.modal.overlay;
+      }else {
+        myDiagram.diagramDetail = $scope.diagram.model;
+        Diagram.update({
+          where: {
+            diagramName: myDiagram.diagramName
+          }
+        }, myDiagram,
+        function(value, responseHeaders){
+          $log.info("update success");
+          loadModelList();
+        }, function(httpResponse){
+          $log.info(httpResponse);
+        });
       }
-    });
-
-
-
-
-
+    }
+    function importModel(){
+      $scope.modal.import = true;
+      $scope.modal.overlay = true;
+    }
+    function exportModel(diagramParam){
+      $scope.modal.export = true;
+      $scope.modal.overlay = true;
+      $scope.jsonDiagram = diagramParam;
+    }
+    function closeModal(){
+      var modalObj = $scope.modal;
+      for(var key in modalObj){
+        modalObj[key] = false;
+      }
+    }
     function initGojs() {
       $scope.g = go.GraphObject.make;
       //diagram
@@ -340,6 +418,49 @@
         });
       }
     }
+    $scope.diagram.model.addChangedListener(function(evt){
+      if (evt.isTransactionFinished) {
+        $log.info($scope.diagram.model.toJson());
+      }
+    });
+    // ----------------------------------------------------------
+    //import file section
+    $scope.uploader = new FileUploader({
+      scope: $scope,
+      url: '/api/containers/container1/upload',
+      formData: [
+        { key: 'value' }
+      ]
+    });
+    $scope.uploader.filters.push({
+        name: 'validateJSON',
+        fn: function (item, options) { // second user filter
+          var isJson = item.name.indexOf(".json") > -1;
+            if (isJson) {
+              console.info("file is json");
+              $scope.importButton = false;
+              return true;
+            }else {
+              console.info("not a json file");
+              $scope.importButton = true;
+              return false;
+            }
+        }
+    });
+    $scope.uploader.onCompleteItem = onCompleteItem;
+    //function
+    function onCompleteItem(item, response, status, headers) {
+      console.info('Complete', item.file.name);
+      $http.get('/api/containers/container1/download/'+item.file.name).then(function (value) {
+        console.log("in get method",value.data);
+        $scope.diagram.model = new go.GraphLinksModel();
+        $scope.diagram.model.linkFromPortIdProperty = "fromPort";
+        $scope.diagram.model.linkToPortIdProperty = "toPort";
+        $scope.diagram.model = go.Model.fromJson(value.data);
+        closeModal();
+      });
+    };
+
   }
 
 })();

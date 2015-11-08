@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html ng-app="app">
-  <head>
-    <meta charset="utf-8">
-    <title>Diagram</title>
-    <link rel="stylesheet" href="bower_components/material-design-lite/material.min.css">
-    <link rel="stylesheet" href="bower_components/bootswatch/bootstrap.css" media="screen" title="no title" charset="utf-8">
-    <link rel="stylesheet" href="css/stylesheet.css" media="screen" title="no title" charset="utf-8">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  </head>
-  <body>
 
-    <!-- Always shows a header, even in smaller screens. -->
+<head>
+  <meta charset="utf-8">
+  <title>Diagram</title>
+  <link rel="stylesheet" href="bower_components/material-design-lite/material.min.css">
+  <link rel="stylesheet" href="bower_components/bootswatch/bootstrap.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="css/stylesheet.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+  <!-- Always shows a header, even in smaller screens. -->
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
@@ -37,7 +38,17 @@
           <div ui-view></div>
         </div>
       </div>
+      <footer class="mdl-mini-footer">
+        <div class="mdl-mini-footer__left-section">
+          <div class="mdl-logo">CDG System .co.ltd</div>
+          <ul class="mdl-mini-footer__link-list">
+            <li><a href="#">Kampnart Kengpohnsakul</a></li>
+            <li><a href="#">Privacy & Terms</a></li>
+          </ul>
+        </div>
+      </footer>
     </main>
+
   </div>
 
 
@@ -47,27 +58,29 @@
 
 
 
-<!-- script -->
-    <!-- gojs -->
-      <script src="js/go.js" charset="utf-8"></script>
-    <!-- angular -->
-      <!-- angular core and library -->
-        <script src="bower_components/angular/angular.min.js" charset="utf-8"></script>
-        <script src="bower_components/angular-route/angular-route.js" charset="utf-8"></script>
-        <script src="bower_components/angular-resource/angular-resource.js" charset="utf-8"></script>
-        <script src="bower_components/angular-animate/angular-animate.js" charset="utf-8"></script>
-        <script src="bower_components/angular-ui-router/release/angular-ui-router.js" charset="utf-8"></script>
-      <!-- angular application -->
-        <script src="js/app.js" charset="utf-8"></script>
-        <script src="js/config.js" charset="utf-8"></script>
-      <!-- controller -->
-        <script src="js/controller/flowchart.js" charset="utf-8"></script>
-        <script src="js/controller/uml.js" charset="utf-8"></script>
-      <!-- services -->
-        <script src="js/services/lb-services.js" charset="utf-8"></script>
-        <script src="js/services/lb-diagram.js" charset="utf-8"></script>
-      <!-- material -->
-        <script src="bower_components/material-design-lite/material.min.js"></script>
-<!-- script -->
-  </body>
+  <!-- script -->
+  <!-- gojs -->
+  <script src="js/go.js" charset="utf-8"></script>
+  <!-- angular -->
+  <!-- angular core and library -->
+  <script src="bower_components/angular/angular.min.js" charset="utf-8"></script>
+  <script src="bower_components/angular-route/angular-route.js" charset="utf-8"></script>
+  <script src="bower_components/angular-resource/angular-resource.js" charset="utf-8"></script>
+  <script src="bower_components/angular-animate/angular-animate.js" charset="utf-8"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js" charset="utf-8"></script>
+  <script src="bower_components/angular-file-upload/dist/angular-file-upload.js" charset="utf-8"></script>
+  <!-- angular application -->
+  <script src="js/app.js" charset="utf-8"></script>
+  <script src="js/config.js" charset="utf-8"></script>
+  <!-- controller -->
+  <script src="js/controller/flowchart.js" charset="utf-8"></script>
+  <script src="js/controller/uml.js" charset="utf-8"></script>
+  <!-- services -->
+  <script src="js/services/lb-services.js" charset="utf-8"></script>
+  <script src="js/services/lb-diagram.js" charset="utf-8"></script>
+  <!-- material -->
+  <script src="bower_components/material-design-lite/material.min.js"></script>
+  <!-- script -->
+</body>
+
 </html>

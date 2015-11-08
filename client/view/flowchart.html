@@ -1,8 +1,8 @@
-
-{{myDiagram.diagramName}}
-<div class="modal-overlay" ng-show="showModal" ng-click="showModal = !showModal"></div>
-<div class="modal-save" ng-show="showModal">
-  <div class="panel panel-primary" style="width: 300px;height: Auto;">
+<!-- modal overlay -->
+<div class="modal-overlay" ng-show="modal.overlay" ng-click="closeModal()"></div>
+<!-- modal save -->
+<div class="modal-save" ng-show="modal.save">
+  <div class="panel panel-primary">
     <div class="panel-heading">
       <strong>Save Diagram</strong>
     </div>
@@ -15,15 +15,53 @@
         <button type="button"
                 class="btn btn-primary btn-sm"
                 name="button"
-                ng-click="saveModel(myDiagram)">save</button>
+                ng-click="saveAsModel(myDiagram)">save</button>
         <button type="button"
                 class="btn btn-link btn-sm btn-cancel"
                 name="button"
-                 ng-click="showModal = !showModal">cancel</button>
+                ng-click="closeModal()">cancel</button>
       </div>
     </div>
   </div>
 </div>
+<!-- modal export -->
+<div class="modal-export" ng-show="modal.export">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Export diagram to JSON String
+    </div>
+    <div class="panel-body">
+      <textarea class="well" ng-model="jsonDiagram" name="jsonString" rows="10" cols="80"></textarea>
+    </div>
+  </div>
+</div>
+<!-- modal import -->
+<div class="modal-import" ng-show="modal.import">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      select JSON file to import
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        <input type="file" class="well" nv-file-select uploader="uploader">
+      </div>
+      <div class="pull-right">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          name="save"
+          ng-disabled="importButton"
+          ng-click="uploader.uploadAll()">import</button>
+        <button
+          type="button"
+          class="btn btn-link btn-sm btn-cancel"
+          name="cancel"
+          ng-click="closeModal()">cacel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- main diagram -->
 <div class="row" style="margin-top: 20px;">
   <div class="col-md-2">
     <div class="panel panel-primary">
@@ -40,8 +78,24 @@
         <button class="btn btn-link btn-sm" id="undo" name="button" ng-click="undoButton()" type="button">undo</button>
         <button class="btn btn-link btn-sm" id="redo" name="button" ng-click="redoButton()" type="button">redo</button>
         <div class="pull-right">
-          <button class="btn btn-link btn-sm" id="saveModel" name="button" ng-click="showModal = !showModal" type="button">save</button>
-          <button class="btn btn-link btn-sm" id="loadModel" name="button" ng-click="loadModel()" type="button">load</button>
+          <button class="btn btn-link btn-sm"
+                  id="exportModel"
+                  name="button"
+                  ng-click="importModel()"
+                  type="button">import
+          </button>
+          <button class="btn btn-link btn-sm"
+                  id="exportModel"
+                  name="button"
+                  ng-click="exportModel(myDiagram.diagramDetail)"
+                  type="button">export
+          </button>
+          <button class="btn btn-link btn-sm"
+          id="saveModel"
+                  name="button"
+                  ng-click="saveModel(myDiagram)"
+                  type="button">save
+          </button>
         </div>
       </div>
       <div class="panel-body" id="myDiagram" style="width: Auto; height: 500px;">
@@ -54,7 +108,12 @@
       <div class="panel-heading">
         <strong>Your Diagram</strong>
       </div>
-      <div class="panel-body" style="width: Auto; height: 500px;"></div>
+      <div class="panel-body well" style="width: Auto; height: 500px;">
+        <select multiple class="form-control" size="7">
+          <option ng-repeat="m in diagramList"
+                  ng-dblclick="loadModel(m.diagramName)">{{m.diagramName}}</option>
+        </select>
+      </div>
     </div>
   </div>
 </div>
