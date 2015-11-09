@@ -53,7 +53,7 @@
       myDiagram.diagramDetail = $scope.diagram.model;
       Diagram.create(myDiagram, function(value, responseHeaders){
         $log.info(value);
-        $scope.showModal = !$scope.showModal;
+        closeModal();
         loadModelList();
       }, function(httpResponse){
         $log.info(httpResponse);
