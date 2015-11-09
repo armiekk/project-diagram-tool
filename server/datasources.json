@@ -15,5 +15,14 @@
     "connector": "loopback-component-storage",
     "provider": "filesystem",
     "root": "./server/storage"
+  },
+  "mysqlDs": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "database": "application-diagram-tool",
+    "password": "armsozk38",
+    "name": "mysqlDs",
+    "connector": "mysql",
+    "user": "root"
   }
 }

@@ -39,5 +39,17 @@
   "container": {
     "dataSource": "storage",
     "public": true
+  },
+  "user": {
+    "dataSource": "mysqlDs",
+    "public": true
+  },
+  "userIdentity": {
+    "dataSource": "mysqlDs",
+    "public": true
+  },
+  "userCredential": {
+    "dataSource": "mysqlDs",
+    "public": true
   }
 }
