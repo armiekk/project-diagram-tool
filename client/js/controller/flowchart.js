@@ -31,6 +31,7 @@
     $scope.saveModel = saveModel;
     $scope.loadModelList = loadModelList;
     $scope.loadModel = loadModel;
+    $scope.selectModel = selectModel;
     $scope.undoButton = undoButton;
     $scope.redoButton = redoButton;
     $scope.saveAsModel = saveAsModel;
@@ -89,6 +90,9 @@
       function(httpResponse){
         $log.info("cannot load diagram");
       });
+    }
+    function selectModel(modelName){
+      $log.info(modelName);
     }
     function undoButton(){
       if ($scope.diagram.model.undoManager.canUndo()) {

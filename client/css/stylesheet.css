@@ -143,6 +143,7 @@ input[type="file"] {
 .dropdown .dropdown-list li a{
   display: block;
   margin: 0;
+  padding-left: 8px;
   color: white;
 }
 .dropdown .dropdown-list li a:hover{

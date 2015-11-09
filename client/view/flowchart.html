@@ -74,35 +74,54 @@
   <div class="col-md-7">
     <div class="panel panel-primary">
       <div class="panel-heading panel-heading-diagram">
-        <button class="btn btn-link btn-sm" id="new" name="button" ng-click="newDiagram()" type="button">new</button>
-        <button class="btn btn-link btn-sm" id="undo" name="button" ng-click="undoButton()" type="button">undo</button>
-        <button class="btn btn-link btn-sm" id="redo" name="button" ng-click="redoButton()" type="button">redo</button>
+        <button class="btn btn-link btn-sm"
+                id="new"
+                name="button"
+                ng-click="newDiagram()"
+                type="button"><i class="fa fa-plus-circle"></i> new
+        </button>
+        <button class="btn btn-link btn-sm"
+                id="saveModel"
+                name="button"
+                ng-click="saveModel(myDiagram)"
+                type="button"><i class="fa fa-floppy-o"></i> save
+        </button>
+        <button
+                class="btn btn-link btn-sm"
+                id="undo"
+                name="button"
+                ng-click="undoButton()"
+                type="button"><i class="fa fa-undo"></i> undo
+        </button>
+        <button
+                class="btn btn-link btn-sm"
+                id="redo"
+                name="button"
+                ng-click="redoButton()"
+                type="button"><i class="fa fa-repeat"></i> redo
+        </button>
         <div class="pull-right">
           <button class="btn btn-link btn-sm"
                   id="exportModel"
                   name="button"
                   ng-click="importModel()"
-                  type="button">import
+                  type="button"><i class="fa fa-download"></i> import
           </button>
           <div class="dropdown">
             <button class="btn btn-link btn-sm"
                     id="exportModel"
                     name="button"
-                    ng-click="exportModel(myDiagram.diagramDetail)"
-                    type="button">export
+                    type="button"><i class="fa fa-upload"></i> export
             </button>
             <ul class="dropdown-list">
-              <li><a href="#">list1</a></li>
-              <li><a href="#">list2</a></li>
-              <li><a href="#">list3</a></li>
+              <li>
+                <a href="" ng-click="exportModel(myDiagram.diagramDetail)">
+                  export to JSON
+                </a>
+              </li>
+              <li><a href="#">export to image</a></li>
             </ul>
           </div>
-          <button class="btn btn-link btn-sm"
-          id="saveModel"
-                  name="button"
-                  ng-click="saveModel(myDiagram)"
-                  type="button">save
-          </button>
         </div>
       </div>
       <div class="panel-body" id="myDiagram" style="width: Auto; height: 500px;">
@@ -114,11 +133,20 @@
     <div class="panel panel-primary">
       <div class="panel-heading">
         <strong>Your Diagram</strong>
+        <div class="pull-right">
+          <button type="button" class="btn btn-link btn-sm" name="delete">
+            <i class="fa fa-trash-o"></i> delete
+          </button>
+        </div>
       </div>
       <div class="panel-body well" style="width: Auto; height: 500px;">
         <select multiple class="form-control" size="7">
-          <option ng-repeat="m in diagramList"
-                  ng-dblclick="loadModel(m.diagramName)">{{m.diagramName}}</option>
+          <option
+              ng-repeat="m in diagramList"
+              ng-click="selectModel(m.diagramName)"
+              ng-dblclick="loadModel(m.diagramName)">
+              {{m.diagramName}}
+          </option>
         </select>
       </div>
     </div>
