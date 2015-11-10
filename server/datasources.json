@@ -19,7 +19,7 @@
   "mysqlDs": {
     "host": "127.0.0.1",
     "port": 3306,
-    "database": "application-diagram-tool",
+    "database": "diatools",
     "password": "armsozk38",
     "name": "mysqlDs",
     "connector": "mysql",

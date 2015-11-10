@@ -8,7 +8,7 @@
       $stateProvider
         .state('flowChart', {
           url: "/flowChart",
-          templateUrl: "view/flowChart.html",
+          templateUrl: "view/flowchart.html",
           controller: "flowChartCtrl"
         })
         .state('UML', {
