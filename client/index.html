@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Diatools , Create your workflow diagram with simple tools</title>
-  </head>
-  <body>
-    index
-  </body>
+<html ng-app="app">
+
+<head>
+  <meta charset="utf-8">
+  <title>Diagram</title>
+  <link rel="stylesheet" href="bower_components/material-design-lite/material.min.css">
+  <link rel="stylesheet" href="bower_components/bootswatch/bootstrap.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="css/stylesheet.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" media="screen" title="no title" charset="utf-8">
+</head>
+
+<body>
+
+  <div ui-view></div>
+
+
+
+
+
+
+
+
+  <!-- script -->
+  <!-- gojs -->
+  <script src="js/go.js" charset="utf-8"></script>
+  <!-- angular -->
+  <!-- angular core and library -->
+  <script src="bower_components/angular/angular.min.js" charset="utf-8"></script>
+  <script src="bower_components/angular-route/angular-route.js" charset="utf-8"></script>
+  <script src="bower_components/angular-resource/angular-resource.js" charset="utf-8"></script>
+  <script src="bower_components/angular-animate/angular-animate.js" charset="utf-8"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js" charset="utf-8"></script>
+  <script src="bower_components/angular-file-upload/dist/angular-file-upload.js" charset="utf-8"></script>
+  <!-- angular application -->
+  <script src="js/app.js" charset="utf-8"></script>
+  <script src="js/config.js" charset="utf-8"></script>
+  <!-- controller -->
+  <script src="js/controller/flowchart.js" charset="utf-8"></script>
+  <script src="js/controller/uml.js" charset="utf-8"></script>
+  <script src="js/controller/authCtrl.js" charset="utf-8"></script>
+  <script src="js/controller/toolsApp.js" charset="utf-8"></script>
+  <!-- services -->
+  <script src="js/services/lb-services.js" charset="utf-8"></script>
+  <script src="js/services/lb-diagram.js" charset="utf-8"></script>
+  <script src="js/services/authServices.js" charset="utf-8"></script>
+  <!-- material -->
+  <script src="bower_components/material-design-lite/material.min.js"></script>
+  <!-- script -->
+</body>
+
 </html>

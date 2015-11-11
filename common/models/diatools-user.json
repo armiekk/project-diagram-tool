@@ -1,0 +1,34 @@
+{
+  "name": "DiatoolsUser",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "password": {
+      "type": "string",
+      "required": true
+    },
+    "fname": {
+      "type": "string",
+      "required": false
+    },
+    "lname": {
+      "type": "string",
+      "required": false
+    },
+    "username": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

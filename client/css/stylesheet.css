@@ -150,3 +150,49 @@ input[type="file"] {
   background-color: white;
   color: #2196f3;
 }
+.drawer.ng-hide {
+  position: absolute;
+  z-index: 99999;
+  background-color: white;
+  box-shadow: 1px 1px 2px #888888;
+  height: 100%;
+  width: 17%;
+  left: -100%;
+
+}
+
+.drawer {
+  position: absolute;
+  z-index: 99999;
+  background-color: white;
+  box-shadow: 1px 1px 2px #888888;
+  height: 100%;
+  width: 17%;
+  left: 0;
+
+}
+.drawer.ng-hide-add, .drawer.ng-hide-remove {
+  transition: all 0.3s ease 0.1s;
+}
+
+.mdl-layout__header-row {
+  padding-left: 30px;
+}
+
+.mdl-layout-title {
+  padding-left: 20px;
+}
+
+.bar-toggle {
+  color: white;
+}
+
+a.logout {
+  color: white;
+  display: block;
+  text-align: right;
+
+}
+strong.username {
+  display: block;
+}

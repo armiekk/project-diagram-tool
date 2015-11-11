@@ -40,16 +40,18 @@
     "dataSource": "storage",
     "public": true
   },
-  "user": {
+  "DiatoolsUser": {
     "dataSource": "mysqlDs",
-    "public": true
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "userIdentity": {
     "dataSource": "mysqlDs",
-    "public": true
+    "public": false
   },
   "userCredential": {
     "dataSource": "mysqlDs",
-    "public": true
+    "public": false
   }
 }

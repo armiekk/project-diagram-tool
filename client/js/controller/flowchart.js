@@ -2,11 +2,11 @@
   'use_strict';
 
   angular.module('app')
-    .controller("flowChartCtrl", ['Diagram', '$scope', '$log', '$window', 'FileUploader', '$http',
+    .controller("flowChartCtrl", ['Diagram', '$scope', '$log', '$window', 'FileUploader', '$http', '$rootScope',
     flowChartCtrl])
     .controller;
 
-  function flowChartCtrl(Diagram, $scope, $log, $window, FileUploader, $http) {
+  function flowChartCtrl(Diagram, $scope, $log, $window, FileUploader, $http, $rootScope) {
     // init function
     initGojs();
     loadModelList();
@@ -17,7 +17,7 @@
     $scope.jsonDiagram;
     $scope.importButton = true;
     $scope.myDiagram = {
-      userName : "nongarmza@gmail.com",
+      userName : "$rootScope.currentUser.email",
       diagramName : "",
       diagramDetail: []
     };
