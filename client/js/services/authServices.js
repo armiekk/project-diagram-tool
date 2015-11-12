@@ -5,9 +5,9 @@
     .module("app")
     .factory("AuthService", ["DiatoolsUser", "$q", "$rootScope", "$log", AuthService]);
 
-    function AuthService(DiatoolsUser, $q, $rootScope, $log){
+    function AuthService(User, $q, $rootScope, $log){
       function login(email, password) {
-        return DiatoolsUser
+        return User
           .login({email: email, password: password})
           .$promise
           .then(function(response) {
@@ -16,7 +16,7 @@
       }
 
       function logout() {
-        return DiatoolsUser
+        return User
          .logout()
          .$promise
          .then(function() {
@@ -25,7 +25,7 @@
       }
 
       function register(email, password) {
-        return DiatoolsUser
+        return User
           .create({
            email: email,
            password: password
@@ -34,8 +34,9 @@
       }
 
       function getCurrent(){
-        return DiatoolsUser
+        return User
           .getCurrent(function(value, responseHeaders){
+            $log.info(value);
             return value;
           }, function(httpResponse){
             $log.info(httpResponse);

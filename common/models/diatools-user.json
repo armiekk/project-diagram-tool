@@ -5,28 +5,7 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {
-    "email": {
-      "type": "string",
-      "required": true
-    },
-    "password": {
-      "type": "string",
-      "required": true
-    },
-    "fname": {
-      "type": "string",
-      "required": false
-    },
-    "lname": {
-      "type": "string",
-      "required": false
-    },
-    "username": {
-      "type": "string",
-      "required": false
-    }
-  },
+  "properties": {},
   "validations": [],
   "relations": {},
   "acls": [],

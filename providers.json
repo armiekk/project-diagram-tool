@@ -2,12 +2,14 @@
   "facebook-login": {
     "provider": "facebook",
     "module": "passport-facebook",
-    "clientID": "421864941355222",
-    "clientSecret": "2131da7b8a24066e826ff32e65aacbcd",
-    "callbackURL": "http://localhost:3000/auth/facebook/callback",
+    "clientID": "949380818479862",
+    "clientSecret": "410037a9c063b932300aae503727e737",
+    "callbackURL": "/auth/facebook/callback",
     "authPath": "/auth/facebook",
     "callbackPath": "/auth/facebook/callback",
-    "successRedirect": "#/toolsApp/flowChart",
-    "scope": ["email"]
+    "successRedirect": "/auth/account",
+    "failureRedirect": "/login",
+    "scope": ["email"],
+    "failureFlash": true
   }
 }

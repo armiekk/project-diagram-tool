@@ -27,12 +27,11 @@
           });
       }
 
-      getUser();
+      // getUser();
 
       function getUser(){
         AuthService.getCurrent().$promise.then(function(value){
-          $scope.currentUser = value.email;
-          $log.info($scope.currentUser);
+
         });
 
       }
