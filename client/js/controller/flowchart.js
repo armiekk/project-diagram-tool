@@ -14,7 +14,6 @@
     // properties
     $scope.uploader = new FileUploader();
     $scope.diagramList = [];
-    $scope.jsonDiagram;
     $scope.importButton = true;
     $scope.myDiagram = {
       userName : "$rootScope.currentUser.email",
@@ -35,9 +34,10 @@
     $scope.undoButton = undoButton;
     $scope.redoButton = redoButton;
     $scope.saveAsModel = saveAsModel;
-    $scope.importModel = importModel;
-    $scope.exportModel = exportModel;
+    $scope.importModal = importModal;
+    $scope.exportModal = exportModal;
     $scope.closeModal = closeModal;
+    $scope.exportJSON = exportJSON;
     // -----------------------------------------------------------
     // function
     function newDiagram(){
@@ -123,14 +123,19 @@
         });
       }
     }
-    function importModel(){
+    function importModal(){
       $scope.modal.import = true;
       $scope.modal.overlay = true;
     }
-    function exportModel(diagramParam){
+    function exportModal(diagramParam){
       $scope.modal.export = true;
       $scope.modal.overlay = true;
-      $scope.jsonDiagram = diagramParam;
+    }
+    function exportJSON(diagramParam) {
+      $log.info("export", diagramParam);
+      $http.post("/export", diagramParam).then(function(value){
+        $log.info("sucess", value);
+      });
     }
     function closeModal(){
       var modalObj = $scope.modal;
@@ -436,6 +441,7 @@
         { key: 'value' }
       ]
     });
+    //validate JSON file
     $scope.uploader.filters.push({
         name: 'validateJSON',
         fn: function (item, options) { // second user filter
@@ -451,6 +457,7 @@
             }
         }
     });
+    // on clomplete import file
     $scope.uploader.onCompleteItem = onCompleteItem;
     //function
     function onCompleteItem(item, response, status, headers) {

@@ -31,7 +31,20 @@
       Export diagram to JSON String
     </div>
     <div class="panel-body">
-      <textarea class="well" ng-model="jsonDiagram" name="jsonString" rows="10" cols="80"></textarea>
+      <strong>Export as...</strong>
+      <div class="form-group">
+        <input type="text" ng-model="myDiagram.diagramName" class="form-control" name="exportName">
+      </div>
+      <div class="pull-right">
+        <button type="button"
+                class="btn btn-primary btn-sm"
+                name="button"
+                ng-click="exportJSON(myDiagram)">export</button>
+        <button type="button"
+                class="btn btn-link btn-sm btn-cancel"
+                name="button"
+                ng-click="closeModal()">cancel</button>
+      </div>
     </div>
   </div>
 </div>
@@ -104,7 +117,7 @@
           <button class="btn btn-link btn-sm"
                   id="exportModel"
                   name="button"
-                  ng-click="importModel()"
+                  ng-click="importModal()"
                   type="button"><i class="fa fa-download"></i> import
           </button>
           <div class="dropdown">
@@ -115,7 +128,7 @@
             </button>
             <ul class="dropdown-list">
               <li>
-                <a href="" ng-click="exportModel(myDiagram.diagramDetail)">
+                <a href="" ng-click="exportModal()">
                   export to JSON
                 </a>
               </li>
