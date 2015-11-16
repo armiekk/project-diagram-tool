@@ -168,12 +168,9 @@ input[type="file"] {
   width: 250px;
   left: 0;
 }
-
 .drawer.ng-hide-add, .drawer.ng-hide-remove {
   transition: all 0.3s ease 0.1s;
 }
-
-
 .mdl-layout__header-row {
   padding-left: 30px;
 }
@@ -190,4 +187,61 @@ a.logout {
 }
 strong.username {
   display: block;
+}
+.bg-header {
+  width: auto;
+  height: 643px;
+  background-image: url(../img/snappa-1447664179.png);
+  background-color: rgba(13, 71, 161, 0.8);
+  margin-bottom: 18px;
+  box-shadow: 0px 1px 5px #888888;
+}
+
+.bg-header h1 {
+  margin: 0;
+  padding-top: 200px;
+  text-align: center;
+  font-family: 'Open Sans',sans-serif;
+  font-weight: 800;
+  color: #F5F5F5;
+}
+.bg-header h2 {
+  margin: 0;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: #F5F5F5;
+}
+
+.button-align {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.header-button {
+  width: inherit;
+  height: inherit;
+  font-family: 'Open Sans', sans-serif;
+  background: rgba(255, 255, 255, 0);
+  color: #F5F5F5;
+  padding: 8px;
+  border-radius: 1px;
+  border: solid 1px #ffffff;
+}
+
+.header-button:hover {
+  width: inherit;
+  height: inherit;
+  font-family: 'Open Sans', sans-serif;
+  background: rgba(255, 255, 255, 1);
+  color: #000000;
+  padding: 8px;
+  border-radius: 1px;
+  border: solid 1px #ffffff;
+}
+
+.main-well {
+  width: auto;
+  height: 300px;
+  text-align: center;
 }

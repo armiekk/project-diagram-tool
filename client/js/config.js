@@ -4,7 +4,7 @@
   angular.module('app')
     .config(function($stateProvider, $urlRouterProvider, $locationProvider, FacebookProvider) {
 
-      FacebookProvider.init("421864941355222");
+      FacebookProvider.init("949380818479862");
 
       $urlRouterProvider.otherwise("/");
 

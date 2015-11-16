@@ -9,8 +9,8 @@
 
   function authCtrl($scope, $rootScope, AuthService, $window, $state, $log, fbServices, Facebook) {
     $scope.user;
-    $scope.register = function() {
-      AuthService.register($scope.user.email, $scope.user.password)
+    $scope.register = function(user) {
+      AuthService.register(user)
         .then(function() {
           $window.alert("Register Successful");
         });

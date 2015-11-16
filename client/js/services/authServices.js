@@ -19,10 +19,7 @@
     function logout() {
       return User
         .logout()
-        .$promise
-        .then(function() {
-          $rootScope.currentUser = null;
-        });
+        .$promise;
     }
 
     function register(user) {
