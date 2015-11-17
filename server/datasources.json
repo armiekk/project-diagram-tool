@@ -4,20 +4,14 @@
     "connector": "memory"
   },
   "mongoDs": {
-    "host": "127.0.0.1",
+    "host": "172.17.0.4",
     "port": 27017,
-    "database": "application-diagram-tool",
+    "database": "diatools",
     "name": "mongoDs",
     "connector": "mongodb"
   },
-  "storage": {
-    "name": "storage",
-    "connector": "loopback-component-storage",
-    "provider": "filesystem",
-    "root": "./server/storage"
-  },
   "mysqlDs": {
-    "host": "localhost",
+    "host": "172.17.0.5",
     "port": 3306,
     "database": "diatools",
     "password": "armsozk38",
