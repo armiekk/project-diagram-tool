@@ -14,6 +14,11 @@
           templateUrl: "view/home.html",
           controller: "authCtrl"
         })
+        .state("register", {
+          url: "/register",
+          templateUrl: "view/register.html",
+          controller: "authCtrl"
+        })
         .state("toolsApp", {
           abstract: true,
           url: "/toolsApp",

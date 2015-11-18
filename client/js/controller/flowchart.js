@@ -2,21 +2,23 @@
   'use_strict';
 
   angular.module('app')
-    .controller("flowChartCtrl", ['Diagram', '$scope', '$log', '$window', 'FileUploader', '$http', '$rootScope',
+    .controller("flowChartCtrl", ['Diagram', '$scope', '$log', '$window', 'FileUploader', '$http', 'AuthService',
     flowChartCtrl])
     .controller;
 
-  function flowChartCtrl(Diagram, $scope, $log, $window, FileUploader, $http, $rootScope) {
+  function flowChartCtrl(Diagram, $scope, $log, $window, FileUploader, $http, AuthService) {
     // init function
+    getUser();
     initGojs();
     loadModelList();
     // ------------------------------------------------------------
     // properties
+    $scope.user;
     $scope.uploader = new FileUploader();
     $scope.diagramList = [];
     $scope.importButton = true;
     $scope.myDiagram = {
-      userName : "$rootScope.currentUser.email",
+      userName : $scope.user,
       diagramName : "",
       diagramDetail: []
     };
@@ -40,9 +42,16 @@
     $scope.exportJSON = exportJSON;
     // -----------------------------------------------------------
     // function
+    function getUser() {
+      if (AuthService.isAuthenticated) {
+        AuthService.getCurrent(function(username) {
+          $scope.user = username;
+        });
+      }
+    }
     function newDiagram(){
       $scope.myDiagram = {
-        userName : "nongarmza@gmail.com",
+        userName : $scope.user,
         diagramName : "",
         diagramDetail: []
       };
@@ -63,7 +72,7 @@
     function loadModelList() {
       Diagram.find({
         where: {
-          userName : "nongarmza@gmail.com"
+          userName : $scope.user
         }
       }, function(listValue, responseHeaders){
         $scope.diagramList = listValue;
@@ -133,7 +142,10 @@
     }
     function exportJSON(diagramParam) {
       $log.info("export", diagramParam);
-      $http.post("/export", diagramParam).then(function(value){
+      // $http.post("/export", diagramParam).then(function(value){
+      //   $log.info("sucess", value);
+      // });
+      $http.get("/export", {params: diagramParam}).then(function(value){
         $log.info("sucess", value);
       });
     }

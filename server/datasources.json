@@ -4,14 +4,16 @@
     "connector": "memory"
   },
   "mongoDs": {
-    "host": "172.17.0.4",
+    "host": "localhost",
     "port": 27017,
     "database": "diatools",
+    "password": "",
     "name": "mongoDs",
-    "connector": "mongodb"
+    "connector": "mongodb",
+    "user": ""
   },
   "mysqlDs": {
-    "host": "172.17.0.5",
+    "host": "localhost",
     "port": 3306,
     "database": "diatools",
     "password": "armsozk38",

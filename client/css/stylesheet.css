@@ -54,11 +54,11 @@
   opacity: 0;
   z-index: 99999;
   width: 400px;
-  height: 400px;
+  height: 500px;
   top: 150px;
   left: 450px;
   background-color: white;
-  border-radius: 4px;
+  border-radius: 8px 8px 4px 4px;
 }
 
 .modal-overlay {
@@ -115,11 +115,11 @@
   opacity: 1;
   z-index: 99999;
   width: 400px;
-  height: 400px;
+  height: 500px;
   top: 100px;
   left: 450px;
   background-color: white;
-  border-radius: 4px;
+  border-radius: 8px 8px 4px 4px;
 
 }
 .modal-overlay.ng-hide-add, .modal-overlay.ng-hide-remove {
@@ -322,66 +322,92 @@ span.header-text{
   text-align: center;
 }
 
-.form-login {
+.modal-login > .login-panel {
   width: auto;
   height: auto;
-  margin: 20px;
-
 }
 
-.header-login {
+.login-panel.header {
   width: auto;
-  height: 100px;
-  border-radius: 4px 4px 0 0;
+  height: 120px;
+  padding-top: 24px;
   text-align: center;
   background-color: #212121;
-}
-
-.header-login > .text-header {
-  padding-top: 36px;
-}
-
-.header-login > .text-header > span {
   color: white;
+  border-radius: 8px 8px 0 0;
 }
 
-.login-label {
+.login-panel.header > .header-text > .text {
+  display: block;
+  font-size: 16px;
+  font-weight: 800;
   font-family: 'Open Sans',sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  color: rgba(100, 100, 100, 0.5);
+}
+
+.login-panel.body {
+  width: auto;
+  height: inherit;
+  padding: 16px;
+}
+
+.login-panel.body > .space-devide {
+  font-size: 16px;
+  display: block;
+  text-align: center;
+}
+
+.login-form {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.login-form.group {
+  margin: 30px 0 24px 0;
+}
+
+.float-label {
+  top: 10;
+  bottom: 0;
+  left: 0;
+  margin-left: 4px;
+  font-size: 17px;
+  color: #9E9E9E;
   position: absolute;
-  z-index: 0;
-  pointer-events:none;
-  transition: all 0.4s;
+  pointer-events: none;
+  transition: all 0.2s;
 }
 
-.login-group {
-  width: auto;
-  margin-top: 24px;
-}
-
-.login-group.button {
-  width: auto;
-  margin-top: 16px;
-}
-
-input.input-login {
-  width: 360px;
+.input-form {
+  width: 100%;
   height: 40px;
-
 }
-input[type=text].input-login:focus ~ label[for=user].login-label {
-  top: -30px;
-  font-size: 14px;
+
+.input-form:focus + .float-label {
+  top: 0;
+  left: -5px;
+  margin-top: -20px;
+  font-size: 13px;
+}
+
+.input-form:valid + .float-label {
+  top: 0;
+  left: -5px;
+  margin-top: -20px;
+  font-size: 13px;
+}
+
+.login-panel.footer {
+  text-align: right;
+  padding-right: 16px;
 }
 
 .login-button {
-  width: 360px;
-  height: 50px;
+  width: 100%;
+  height: 40px;
   padding: 4px 0 4px 0;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 16px;
   background: rgba(255, 255, 255, 0);
   color: #000000;
@@ -399,10 +425,10 @@ input[type=text].input-login:focus ~ label[for=user].login-label {
 }
 
 .login-button:hover {
-  width: 360px;
-  height: 50px;
+  width: 100%;
+  height: 40px;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 16px;
   background: rgba(0, 0, 0, 1);
   color: #ffffff;
@@ -418,6 +444,68 @@ input[type=text].input-login:focus ~ label[for=user].login-label {
   transition: all 0.4s;
 }
 
+.register {
+  width: 100%;
+  height: 680px;
+  margin: 0 auto;
+  background-image: url(../img/bg-register.png);
+}
+
+h1.reg-header {
+  font-family: "Open Sans",sans-serif;
+  font-weight: 800;
+  color: white;
+  padding-top: 50px;
+  text-align: center;
+  margin: 0;
+}
+
+.register-panel {
+  width: 50%;
+  height: 65%;
+  margin: 16px auto 0px auto;
+  padding: 4px;
+  border-radius: 4px;
+  opacity: 0.7;
+  background-color: #212121;
+}
+
+.register-body {
+  height: 100%;
+  font-family: 'Open Sans',sans-serif;
+  color: white;
+  border-radius: 4px;
+}
+
+.reg-column {
+  text-align: center;
+  color: black;
+}
+
+.reg-column > h3 {
+  font-family: "Open Sans",sans-serif;
+  color: white;
+  font-weight: 600;
+  margin-top: 30%;
+}
+
+.signup-button {
+  width: 100%;
+  height: 40px;
+  padding: 4px 0 4px 0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0);
+  color: #4CAF50;
+  border-radius: 1px;
+  border: solid 1px #4CAF50;
+  transition: all 0.4s;
+}
+.signup-button:hover {
+  color: #ffffff;
+  background: #4CAF50;
+}
 
 .main-well {
   width: auto;

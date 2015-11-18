@@ -19,14 +19,19 @@
     $scope.logout = logout;
     $scope.showLoginModal = showLoginModal;
     $scope.closeModal = closeModal;
-    $scope.IntentLogin = fbServices.fbLogin;
+    $scope.facebookLogin = fbServices.fbLogin;
     $scope.facebookLogout = fbServices.fbLogout;
 
     function register(user) {
-      AuthService.register(user)
-        .then(function() {
-          $window.alert("Register Successful");
-        });
+      $scope.passwordMatch = user.password === user.rePassword;
+      if ($scope.passwordMatch) {
+        AuthService.register(user)
+          .then(function() {
+            $window.alert("Register Successful");
+          });
+      }else {
+        $window.alert("password not match !");
+      }
     };
 
     function login(user) {
@@ -46,7 +51,6 @@
     function getUser() {
       if (AuthService.isAuthenticated) {
         AuthService.getCurrent(function(username) {
-          $log.info("username", username);
           $scope.user = username;
         });
       }

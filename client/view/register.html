@@ -1,0 +1,40 @@
+<div class="register">
+  <h1 class="reg-header">DIATOOLS REGISTER</h1>
+  <div class="register-panel">
+    <div class="register-body">
+      <div class="col-md-6">
+        <div class="reg-column">
+          <div class="login-form">
+            <div class="login-form group">
+              <input type="text" class="input-form" name="user" ng-model="user.username" required>
+              <label for="user" class="float-label">Username :</label>
+            </div>
+            <div class="login-form group">
+              <input type="text" class="input-form" name="fname" ng-model="user.fullname" required>
+              <label for="fname" class="float-label">Full name :</label>
+            </div>
+            <div class="login-form group">
+              <input type="text" class="input-form" name="email" ng-model="user.email" required>
+              <label for="email" class="float-label">E-mail :</label>
+            </div>
+            <div class="login-form group">
+              <input type="password" class="input-form" name="pw" ng-model="user.password" required>
+              <label for="password" class="float-label">Password :</label>
+            </div>
+            <div class="login-form group">
+              <input type="password" class="input-form" name="repw" ng-model="user.rePassword" required>
+              <label for="repw" class="float-label">Re-type Password :</label>
+            </div>
+          </div>
+          <button type="button" class="signup-button" ng-click="register(user)">REGISTER</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="reg-column">
+          <h3>or Register with Facebook</h3>
+          <button type="button" class="login-button facebook" ng-click="facebookLogin()">REGISTER WITH FACEBOOK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
