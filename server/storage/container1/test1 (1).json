@@ -1,0 +1,11 @@
+﻿{ "class": "diagramDetail",
+  "linkFromPortIdProperty": "fromPort",
+  "linkToPortIdProperty": "toPort",
+  "nodeDataArray": [ 
+{"category":"Start", "text":"Start", "key":-1, "loc":"41.84375 -121"},
+{"text":"???", "figure":"Diamond", "key":-3, "loc":"32.84375 19"},
+{"text":"Step", "key":-2, "loc":"-133.15625 -8"},
+{"text":"???", "figure":"Diamond", "key":-4, "loc":"-231.15625 -131"},
+{"category":"Start", "text":"Start", "key":-5, "loc":"-91.15625 -245"}
+ ],
+  "linkDataArray": []}

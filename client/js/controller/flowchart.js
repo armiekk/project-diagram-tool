@@ -2,23 +2,18 @@
   'use_strict';
 
   angular.module('app')
-    .controller("flowChartCtrl", ['Diagram', '$scope', '$log', '$window', 'FileUploader', '$http', 'AuthService',
+    .controller("flowChartCtrl", ['Diagram', '$scope', '$log', '$window', 'FileUploader', '$http', 'AuthService', 'SaveFile',
     flowChartCtrl])
     .controller;
 
-  function flowChartCtrl(Diagram, $scope, $log, $window, FileUploader, $http, AuthService) {
-    // init function
-    getUser();
-    initGojs();
-    loadModelList();
-    // ------------------------------------------------------------
+  function flowChartCtrl(Diagram, $scope, $log, $window, FileUploader, $http, AuthService, SaveFile) {
+
     // properties
-    $scope.user;
     $scope.uploader = new FileUploader();
     $scope.diagramList = [];
     $scope.importButton = true;
     $scope.myDiagram = {
-      userName : $scope.user,
+      userName : "",
       diagramName : "",
       diagramDetail: []
     };
@@ -41,20 +36,22 @@
     $scope.closeModal = closeModal;
     $scope.exportJSON = exportJSON;
     // -----------------------------------------------------------
+    // init function
+    getUser();
+    initGojs();
     // function
     function getUser() {
       if (AuthService.isAuthenticated) {
         AuthService.getCurrent(function(username) {
-          $scope.user = username;
+          $scope.myDiagram.userName = username;
+          $log.info("in get user ",$scope.myDiagram.userName);
+          loadModelList($scope.myDiagram.userName);
         });
       }
     }
     function newDiagram(){
-      $scope.myDiagram = {
-        userName : $scope.user,
-        diagramName : "",
-        diagramDetail: []
-      };
+      $scope.myDiagram.diagramName = "";
+      $scope.myDiagram.diagramDetail = [];
       $scope.diagram.model = new go.GraphLinksModel();
       $scope.diagram.model.linkFromPortIdProperty = "fromPort";
       $scope.diagram.model.linkToPortIdProperty = "toPort";
@@ -64,33 +61,37 @@
       Diagram.create(myDiagram, function(value, responseHeaders){
         $log.info(value);
         closeModal();
-        loadModelList();
+        loadModelList(myDiagram.userName);
       }, function(httpResponse){
         $log.info(httpResponse);
       });
     }
-    function loadModelList() {
+    function loadModelList(userParam) {
+      $log.info("show user", userParam);
       Diagram.find({
-        where: {
-          userName : $scope.user
+        filter: {
+          where: {
+            userName : userParam
+          }
         }
       }, function(listValue, responseHeaders){
         $scope.diagramList = listValue;
+        $log.info("loadModelList ", $scope.diagramList);
       }, function(httpResponse){
         $log.info(httpResponse);
       });
     }
-    function loadModel(dnParam){
-      $log.info(dnParam);
+    function loadModel(diagram){
+      $log.info(diagram);
       Diagram.findOne({
         filter: {
           where: {
-            diagramName: dnParam
+            and: [{userName: diagram.userName}, {diagramName: diagram.diagramName}]
           }
         }
       }, function(value, responseHeaders){
         $scope.myDiagram = value;
-        $log.info(value);
+        $log.info("load diagram",value);
         $scope.diagram.model = new go.GraphLinksModel();
         $scope.diagram.model.linkFromPortIdProperty = "fromPort";
         $scope.diagram.model.linkToPortIdProperty = "toPort";
@@ -121,12 +122,12 @@
         myDiagram.diagramDetail = $scope.diagram.model;
         Diagram.update({
           where: {
-            diagramName: myDiagram.diagramName
+            and: [{userName: myDiagram.userName}, {diagramName: myDiagram.diagramName}]
           }
         }, myDiagram,
         function(value, responseHeaders){
-          $log.info("update success");
-          loadModelList();
+          $log.info("in update successful ",myDiagram);
+          loadModelList(myDiagram.userName);
         }, function(httpResponse){
           $log.info(httpResponse);
         });
@@ -141,13 +142,9 @@
       $scope.modal.overlay = true;
     }
     function exportJSON(diagramParam) {
-      $log.info("export", diagramParam);
-      // $http.post("/export", diagramParam).then(function(value){
-      //   $log.info("sucess", value);
-      // });
-      $http.get("/export", {params: diagramParam}).then(function(value){
-        $log.info("sucess", value);
-      });
+      $log.info("in ctrl ", diagramParam.diagramDetail);
+      SaveFile.save(diagramParam.diagramName, diagramParam.diagramDetail);
+      closeModal();
     }
     function closeModal(){
       var modalObj = $scope.modal;

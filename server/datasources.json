@@ -20,5 +20,11 @@
     "name": "mysqlDs",
     "connector": "mysql",
     "user": "root"
+  },
+  "myFile": {
+    "name": "myFile",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./server/storage"
   }
 }

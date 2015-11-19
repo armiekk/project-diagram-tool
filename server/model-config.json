@@ -38,7 +38,7 @@
     "public": true
   },
   "container": {
-    "dataSource": null,
+    "dataSource": "myFile",
     "public": true
   },
   "DiatoolsUser": {
