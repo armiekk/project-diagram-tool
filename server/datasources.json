@@ -16,7 +16,7 @@
     "host": "localhost",
     "port": 3306,
     "database": "diatools",
-    "password": "armsozk38",
+    "password": "1234",
     "name": "mysqlDs",
     "connector": "mysql",
     "user": "root"

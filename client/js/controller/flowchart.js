@@ -21,7 +21,8 @@
       save : false,
       overlay: false,
       import: false,
-      export: false
+      exportJson: false,
+      exportImage: false
     };
     $scope.newDiagram = newDiagram;
     $scope.saveModel = saveModel;
@@ -32,9 +33,11 @@
     $scope.redoButton = redoButton;
     $scope.saveAsModel = saveAsModel;
     $scope.importModal = importModal;
-    $scope.exportModal = exportModal;
+    $scope.exportJsonModal = exportJsonModal;
+    $scope.exportImageModal = exportImageModal;
     $scope.closeModal = closeModal;
     $scope.exportJSON = exportJSON;
+    $scope.exportImage = exportImage;
     // -----------------------------------------------------------
     // init function
     getUser();
@@ -57,7 +60,8 @@
       $scope.diagram.model.linkToPortIdProperty = "toPort";
     }
     function saveAsModel(myDiagram){
-      myDiagram.diagramDetail = $scope.diagram.model;
+      myDiagram.diagramDetail = JSON.parse($scope.diagram.model.toJson());
+      $log.info("model ",JSON.parse($scope.diagram.model.toJson()));
       Diagram.create(myDiagram, function(value, responseHeaders){
         $log.info(value);
         closeModal();
@@ -90,12 +94,13 @@
           }
         }
       }, function(value, responseHeaders){
+        delete value.DIAGRAM_ID;
         $scope.myDiagram = value;
-        $log.info("load diagram",value);
         $scope.diagram.model = new go.GraphLinksModel();
         $scope.diagram.model.linkFromPortIdProperty = "fromPort";
         $scope.diagram.model.linkToPortIdProperty = "toPort";
-        $scope.diagram.model = go.Model.fromJson($scope.myDiagram.diagramDetail);
+        $scope.myDiagram.diagramDetail = $scope.diagram.model = go.Model.fromJson($scope.myDiagram.diagramDetail);
+        $log.info("model", $scope.myDiagram);
       },
       function(httpResponse){
         $log.info("cannot load diagram");
@@ -137,13 +142,30 @@
       $scope.modal.import = true;
       $scope.modal.overlay = true;
     }
-    function exportModal(diagramParam){
-      $scope.modal.export = true;
+    function exportJsonModal(diagramParam){
+      $scope.modal.exportJson = true;
+      $scope.modal.overlay = true;
+    }
+    function exportImageModal(diagramName){
+      $scope.modal.exportImage = true;
       $scope.modal.overlay = true;
     }
     function exportJSON(diagramParam) {
-      $log.info("in ctrl ", diagramParam.diagramDetail);
-      SaveFile.save(diagramParam.diagramName, diagramParam.diagramDetail);
+      SaveFile.saveJson(diagramParam.diagramName, diagramParam.diagramDetail);
+      closeModal();
+    }
+    function exportImage(diagramName) {
+      var imageDetail = $scope.diagram.makeImage({
+        scale: 0.8,
+        background: "rgba(255, 255 ,255, 1)",
+        type: "image/png",
+        size: new go.Size(800, 600)
+      });
+      var canvas = document.createElement('canvas');
+      canvas.width = 800, canvas.height = 600;
+      context = canvas.getContext('2d');
+      context.drawImage(imageDetail, 0, 0);
+      SaveFile.saveImage(diagramName, canvas);
       closeModal();
     }
     function closeModal(){
@@ -182,7 +204,8 @@
           "LinkDrawn": showLinkLabel,
           "LinkRelinked": showLinkLabel,
           "animationManager.duration": 800,
-          "undoManager.isEnabled": true
+          "undoManager.isEnabled": true,
+          "draggingTool.isGridSnapEnabled": true
         });
 
       // helper definitions for node templates
@@ -237,7 +260,8 @@
 
       var lightText = 'whitesmoke';
 
-      $scope.diagram.nodeTemplateMap.add("", // the default category
+      $scope.diagram.nodeTemplateMap.add("",
+       // the default category
         $scope.g(go.Node, "Spot", nodeStyle(),
           // the main object is a Panel that surrounds a TextBlock with a rectangular Shape
           $scope.g(go.Panel, "Auto",

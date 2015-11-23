@@ -1,7 +1,9 @@
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <div class="modal-overlay" ng-show="modal.overlay" ng-click="closeModal()"></div>
   <div class="drawer" ng-show="modal.drawer">
-    <span class="drawer-title">Diagram list</span>
+    <div class="drawer-header">
+      <span class="drawer-title">Diagram Categories</span>
+    </div>
     <nav class="drawer-navigation">
       <a class="drawer-navigation-link" ui-sref="toolsApp.flowChart">Flowchart</a>
       <a class="drawer-navigation-link" ui-sref="toolsApp.UML">UML</a>

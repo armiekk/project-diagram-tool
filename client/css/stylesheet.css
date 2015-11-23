@@ -35,7 +35,20 @@
   z-index: 99999;
   opacity: 0;
 }
-.modal-export.ng-hide {
+.modal-export-json.ng-hide {
+  width: 500px;
+  height: 0px;
+  visibility: hidden;
+  position: fixed;
+  top: 150px;
+  right: 0;
+  bottom: 0;
+  left: 30%;
+  z-index: 99999;
+  opacity: 0;
+}
+
+.modal-export-image.ng-hide {
   width: 500px;
   height: 0px;
   visibility: hidden;
@@ -96,7 +109,20 @@
   z-index: 99999;
   opacity: 1;
 }
-.modal-export {
+.modal-export-json {
+  width: 500px;
+  height: 0px;
+  visibility: visible;
+  position: fixed;
+  top: 100px;
+  right: 0;
+  bottom: 0;
+  left: 30%;
+  z-index: 99999;
+  opacity: 1;
+}
+
+.modal-export-image {
   width: 500px;
   height: 0px;
   visibility: visible;
@@ -131,10 +157,12 @@
 .modal-import.ng-hide-add, .modal-import.ng-hide-remove {
   transition: all 0.4s ease 0.1s;
 }
-.modal-export.ng-hide-add, .modal-export.ng-hide-remove {
+.modal-export-image.ng-hide-add, .modal-export-image.ng-hide-remove {
   transition: all 0.4s ease 0.1s;
 }
-
+.modal-export-json.ng-hide-add, .modal-export-json.ng-hide-remove {
+  transition: all 0.4s ease 0.1s;
+}
 .modal-login.ng-hide-add, .modal-login.ng-hide-remove {
   transition: all 0.4s ease 0.1s;
 }
@@ -505,6 +533,43 @@ h1.reg-header {
 .signup-button:hover {
   color: #ffffff;
   background: #4CAF50;
+}
+
+.drawer-header {
+  padding: 8px 0 8px 16px;
+  background: #212121;
+}
+
+.drawer-header .drawer-title {
+  font-size: 40px;
+  font-weight: 800;
+  font-family: "Open Sans", sans-serif;
+  color: #ffffff;
+}
+
+.drawer-navigation .drawer-navigation-link {
+  display: block;
+  width: auto;
+  height: inherit;
+  font-size: 20px;
+  font-weight: 800;
+  font-family: "Open Sans", sans-serif;
+  padding-left: 16px;
+  color: #212121;
+}
+
+.export-image {
+  width: inherit;
+  margin: 0 auto;
+}
+
+div#image-canvas img {
+  margin: 0 auto;
+}
+
+.drawer-navigation .drawer-navigation-link:hover {
+  color: #ffffff;
+  background: #212121;
 }
 
 .main-well {

@@ -25,10 +25,10 @@
   </div>
 </div>
 <!-- modal export -->
-<div class="modal-export" ng-show="modal.export">
+<div class="modal-export-json" ng-show="modal.exportJson">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      Export diagram to JSON String
+      Export diagram to JSON
     </div>
     <div class="panel-body">
       <strong>Export as...</strong>
@@ -40,6 +40,29 @@
                 class="btn btn-primary btn-sm"
                 name="button"
                 ng-click="exportJSON(myDiagram)">export</button>
+        <button type="button"
+                class="btn btn-link btn-sm btn-cancel"
+                name="button"
+                ng-click="closeModal()">cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-export-image" ng-show="modal.exportImage">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Export diagram to image
+    </div>
+    <div class="panel-body">
+      <strong>Export as...</strong>
+      <div class="form-group">
+        <input type="text" ng-model="myDiagram.diagramName" class="form-control" name="exportName">
+      </div>
+      <div class="pull-right">
+        <button type="button"
+                class="btn btn-primary btn-sm"
+                name="button"
+                ng-click="exportImage(myDiagram.diagramName)">export</button>
         <button type="button"
                 class="btn btn-link btn-sm btn-cancel"
                 name="button"
@@ -79,7 +102,7 @@
   <div class="col-md-2">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <strong>Compenents</strong>
+        <strong>Components</strong>
       </div>
       <div class="panel-body" id="leftPalette" style="width: Auto; height: 500px;"></div>
     </div>
@@ -128,11 +151,13 @@
             </button>
             <ul class="dropdown-list">
               <li>
-                <a href="" ng-click="exportModal()">
+                <a href="" ng-click="exportJsonModal()">
                   export to JSON
                 </a>
               </li>
-              <li><a href="#">export to image</a></li>
+              <li>
+                <a href="" ng-click="exportImageModal()">export to image</a>
+              </li>
             </ul>
           </div>
         </div>

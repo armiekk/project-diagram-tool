@@ -7,14 +7,24 @@
 
     function saveFile($log){
 
-      function save(fileName, data){
-        $log.info("data ", data);
-        var blob = new Blob([data], {type: "text/json;charset=utf-8"});
+      function saveJson(fileName, data){
+        var jsonString = data.toJson();
+        var blob = new Blob([jsonString], {type: "text/json;charset=utf-8"});
         saveAs(blob, fileName+".json");
       }
 
+      function saveImage(fileName, data){
+        data.toBlob(function(blob){
+          saveAs(
+            blob,
+            fileName+".png"
+          );
+        }, "image/png");
+      }
+
       return {
-        save: save
+        saveJson: saveJson,
+        saveImage: saveImage
       };
     }
 })();
