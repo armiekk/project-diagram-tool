@@ -1,1 +1,14 @@
-﻿{"DIAGRAM_ID":"564c37f63379b383263f3dfb","diagramName":"test1","diagramDetail":"{ \"class\": \"diagramDetail\",\n  \"linkFromPortIdProperty\": \"fromPort\",\n  \"linkToPortIdProperty\": \"toPort\",\n  \"nodeDataArray\": [ \n{\"category\":\"Start\", \"text\":\"Start\", \"key\":-1, \"loc\":\"41.84375 -121\"},\n{\"text\":\"???\", \"figure\":\"Diamond\", \"key\":-3, \"loc\":\"32.84375 19\"},\n{\"text\":\"Step\", \"key\":-2, \"loc\":\"-133.15625 -8\"},\n{\"text\":\"???\", \"figure\":\"Diamond\", \"key\":-4, \"loc\":\"-231.15625 -131\"},\n{\"category\":\"Start\", \"text\":\"Start\", \"key\":-5, \"loc\":\"-91.15625 -245\"}\n ],\n  \"linkDataArray\": []}"}
+﻿{ "class": "go.GraphLinksModel",
+  "linkFromPortIdProperty": "fromPort",
+  "linkToPortIdProperty": "toPort",
+  "nodeDataArray": [ 
+{"category":"Start", "text":"Start", "key":-1, "loc":"-40 -170"},
+{"text":"???", "figure":"Diamond", "key":-3, "loc":"-40 -60"},
+{"text":"Step", "key":-2, "loc":"-40 70"},
+{"category":"End", "text":"End", "key":-4, "loc":"-40 170"}
+ ],
+  "linkDataArray": [ 
+{"from":-1, "to":-3, "fromPort":"B", "toPort":"T", "points":[-40.00000000000001,-144.7906976744186,-40.00000000000001,-134.7906976744186,-40.00000000000001,-118.4453488372093,-40,-118.4453488372093,-40,-102.1,-40,-92.1]},
+{"from":-3, "to":-2, "fromPort":"B", "toPort":"T", "visible":true, "points":[-40,-27.89999999999999,-40,-17.89999999999999,-40,12.900000000000006,-40,12.900000000000006,-40,43.7,-40,53.7]},
+{"from":-2, "to":-4, "fromPort":"B", "toPort":"T", "points":[-40,86.30000000000001,-40,96.30000000000001,-40,117.72558139534884,-40,117.72558139534884,-40,139.15116279069767,-40,149.15116279069767]}
+ ]}

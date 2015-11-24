@@ -37,6 +37,12 @@
           templateUrl: "view/uml.html",
           controller: "umlCtrl",
           authenticate: true
+        })
+        .state('toolsApp.Prototype', {
+          url: "/Prototype",
+          templateUrl: "view/prototype.html",
+          controller: "prototypeCtrl",
+          authenticate: true
         });
       $locationProvider.html5Mode(true);
     })

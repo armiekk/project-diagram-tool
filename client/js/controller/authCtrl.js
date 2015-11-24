@@ -28,6 +28,7 @@
         AuthService.register(user)
           .then(function() {
             $window.alert("Register Successful");
+            $state.go("home");
           });
       }else {
         $window.alert("password not match !");

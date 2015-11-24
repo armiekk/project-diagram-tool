@@ -5755,8 +5755,8 @@ button.list-group-item-danger.active:focus {
 }
 .panel-primary > .panel-heading {
   color: #ffffff;
-  background-color: #2196f3;
-  border-color: #2196f3;
+  background-color: #424242;
+  border-color: #424242;
 }
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #2196f3;
@@ -7009,7 +7009,7 @@ button.close {
 .btn-link:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #2196f3;
+  color: #424242;
   text-decoration: none;
 }
 .btn-default.disabled {

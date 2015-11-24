@@ -194,7 +194,7 @@ input[type="file"] {
   list-style: none;
   width: 150px;
   margin: 0;
-  background-color: #2196f3;
+  background-color: #424242;
   border-radius: 0 0 4px 4px;
 }
 .dropdown:hover .dropdown-list {
@@ -209,7 +209,7 @@ input[type="file"] {
 }
 .dropdown .dropdown-list li a:hover {
   background-color: white;
-  color: #2196f3;
+  color: #424242;
 }
 .drawer.ng-hide {
   position: absolute;
@@ -240,6 +240,9 @@ input[type="file"] {
 }
 .bar-toggle {
   color: white;
+}
+.bar-toggle:hover {
+  color: #424242;
 }
 a.logout {
   color: white;

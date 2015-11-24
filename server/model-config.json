@@ -35,7 +35,9 @@
   },
   "Diagram": {
     "dataSource": "mongoDs",
-    "public": true
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "container": {
     "dataSource": "myFile",

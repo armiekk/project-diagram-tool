@@ -6,7 +6,7 @@
     "validateUpsert": true
   },
   "properties": {
-    "DIAGRAM_ID": {
+    "diagramId": {
       "type": "string",
       "id": true,
       "generated": true

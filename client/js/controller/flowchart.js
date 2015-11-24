@@ -94,7 +94,7 @@
           }
         }
       }, function(value, responseHeaders){
-        delete value.DIAGRAM_ID;
+        delete value.diagramId;
         $scope.myDiagram = value;
         $scope.diagram.model = new go.GraphLinksModel();
         $scope.diagram.model.linkFromPortIdProperty = "fromPort";
@@ -156,13 +156,13 @@
     }
     function exportImage(diagramName) {
       var imageDetail = $scope.diagram.makeImage({
-        scale: 0.8,
+        scale: 1,
         background: "rgba(255, 255 ,255, 1)",
-        type: "image/png",
-        size: new go.Size(800, 600)
+        type: "image/png"
       });
+      $log.info(imageDetail);
       var canvas = document.createElement('canvas');
-      canvas.width = 800, canvas.height = 600;
+      canvas.width = imageDetail.width, canvas.height = imageDetail.height;
       context = canvas.getContext('2d');
       context.drawImage(imageDetail, 0, 0);
       SaveFile.saveImage(diagramName, canvas);
@@ -209,6 +209,25 @@
         });
 
       // helper definitions for node templates
+
+      var nodeSelectionAdornmentTemplate =
+            $scope.g(go.Adornment, "Auto",
+              $scope.g(go.Shape, { fill: null, stroke: "deepskyblue", strokeWidth: 1.5, strokeDashArray: [4, 2] }),
+              $scope.g(go.Placeholder)
+            );
+      var nodeResizeAdornmentTemplate =
+            $scope.g(go.Adornment, "Spot",
+              { locationSpot: go.Spot.Right },
+              $scope.g(go.Placeholder),
+              $scope.g(go.Shape, { alignment: go.Spot.TopLeft, cursor: "nw-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+              $scope.g(go.Shape, { alignment: go.Spot.Top, cursor: "n-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+              $scope.g(go.Shape, { alignment: go.Spot.TopRight, cursor: "ne-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+              $scope.g(go.Shape, { alignment: go.Spot.Left, cursor: "w-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+              $scope.g(go.Shape, { alignment: go.Spot.Right, cursor: "e-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+              $scope.g(go.Shape, { alignment: go.Spot.BottomLeft, cursor: "se-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+              $scope.g(go.Shape, { alignment: go.Spot.Bottom, cursor: "s-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+              $scope.g(go.Shape, { alignment: go.Spot.BottomRight, cursor: "sw-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" })
+            );
 
       function nodeStyle() {
         return [
@@ -263,16 +282,20 @@
       $scope.diagram.nodeTemplateMap.add("",
        // the default category
         $scope.g(go.Node, "Spot", nodeStyle(),
+        { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+        { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
           // the main object is a Panel that surrounds a TextBlock with a rectangular Shape
           $scope.g(go.Panel, "Auto",
+            { name: "PANEL"},
+            new go.Binding("desiredSize", "size", go.Size.parse).makeTwoWay(go.Size.stringify),
             $scope.g(go.Shape, "Rectangle", {
-                fill: "#00A9C9",
-                stroke: null
+                fill: "#FAFAFA",
+                stroke: "#212121"
               },
               new go.Binding("figure", "figure")),
             $scope.g(go.TextBlock, {
                 font: "bold 11pt Helvetica, Arial, sans-serif",
-                stroke: lightText,
+                stroke: "#212121",
                 margin: 8,
                 maxSize: new go.Size(160, NaN),
                 wrap: go.TextBlock.WrapFit,
@@ -289,15 +312,18 @@
 
       $scope.diagram.nodeTemplateMap.add("Start",
         $scope.g(go.Node, "Spot", nodeStyle(),
+          { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+          { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
           $scope.g(go.Panel, "Auto",
+            { name: "PANEL" },
             $scope.g(go.Shape, "Circle", {
               minSize: new go.Size(40, 40),
-              fill: "#79C900",
-              stroke: null
+              fill: "#FAFAFA",
+              stroke: "#212121"
             }),
             $scope.g(go.TextBlock, "Start", {
                 font: "bold 11pt Helvetica, Arial, sans-serif",
-                stroke: lightText
+                stroke: "#212121"
               },
               new go.Binding("text"))
           ),
@@ -309,15 +335,18 @@
 
       $scope.diagram.nodeTemplateMap.add("End",
         $scope.g(go.Node, "Spot", nodeStyle(),
+          { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+          { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
           $scope.g(go.Panel, "Auto",
+            { name: "PANEL" },
             $scope.g(go.Shape, "Circle", {
               minSize: new go.Size(40, 40),
-              fill: "#DC3C00",
-              stroke: null
+              fill: "#FAFAFA",
+              stroke: "#212121"
             }),
             $scope.g(go.TextBlock, "End", {
                 font: "bold 11pt Helvetica, Arial, sans-serif",
-                stroke: lightText
+                stroke: "#212121"
               },
               new go.Binding("text"))
           ),
@@ -329,9 +358,11 @@
 
       $scope.diagram.nodeTemplateMap.add("Comment",
         $scope.g(go.Node, "Auto", nodeStyle(),
+          { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
+          { resizable: true, resizeObjectName: "PANEL", resizeAdornmentTemplate: nodeResizeAdornmentTemplate },
           $scope.g(go.Shape, "File", {
-            fill: "#EFFAB4",
-            stroke: null
+            fill: "#FAFAFA",
+            stroke: "#212121"
           }),
           $scope.g(go.TextBlock, {
               margin: 5,
@@ -340,7 +371,7 @@
               textAlign: "center",
               editable: true,
               font: "bold 12pt Helvetica, Arial, sans-serif",
-              stroke: '#454545'
+              stroke: '#212121'
             },
             new go.Binding("text").makeTwoWay())
           // no ports, because no links are allowed to connect with a comment
@@ -378,14 +409,14 @@
           $scope.g(go.Shape, // the link path shape
             {
               isPanelMain: true,
-              stroke: "gray",
+              stroke: "#212121",
               strokeWidth: 2
             }),
           $scope.g(go.Shape, // the arrowhead
             {
               toArrow: "standard",
               stroke: null,
-              fill: "gray"
+              fill: "#212121"
             }),
           $scope.g(go.Panel, "Auto", // the link label, normally not visible
             {
@@ -400,7 +431,7 @@
                 fill: "#F8F8F8",
                 stroke: null
               }),
-            $scope.g(go.TextBlock, "Yes", // the label
+            $scope.g(go.TextBlock, "Label", // the label
               {
                 textAlign: "center",
                 font: "10pt helvetica, arial, sans-serif",
@@ -456,7 +487,7 @@
         var diagram = node.diagram;
         if (!diagram || diagram.isReadOnly || !diagram.allowLink) return;
         node.ports.each(function(port) {
-          port.stroke = (show ? "white" : null);
+          port.stroke = (show ? "#212121" : null);
         });
       }
     }
