@@ -28,14 +28,14 @@
         })
         .state('toolsApp.flowChart', {
           url: "/flowChart",
-          templateUrl: "view/flowchart.html",
-          controller: "flowChartCtrl",
+          templateUrl: "view/diagram/flowchart.html",
+          controller: "diagramCtrl",
           authenticate: true
         })
-        .state('toolsApp.UML', {
-          url: "/UML",
-          templateUrl: "view/uml.html",
-          controller: "umlCtrl",
+        .state('toolsApp.ER', {
+          url: "/ER",
+          templateUrl: "view/diagram/er.html",
+          controller: "diagramCtrl",
           authenticate: true
         })
         .state('toolsApp.Prototype', {
@@ -46,15 +46,26 @@
         });
       $locationProvider.html5Mode(true);
     })
-    .run(['$rootScope', '$state', '$log', 'DiatoolsUser', 'fbServices',
-      function($rootScope, $state, $log, User, fbServices) {
-        $log.info("User is authenticate",User.isAuthenticated());
+    .run(['$rootScope', '$state', '$log', 'AuthService', 'fbServices',
+      function($rootScope, $state, $log, AuthService, fbServices) {
+        getUser();
         $rootScope.$on('$stateChangeStart', function(event, next) {
-          if (next.authenticate && !User.isAuthenticated()) {
-            event.preventDefault(); //prevent current page from loading
+          if (next.authenticate && !AuthService.isAuthenticated) {
+            event.preventDefault();
             $state.go("home");
           }
+
+
         });
+        function getUser() {
+          if (AuthService.isAuthenticated) {
+            AuthService.getCurrent(function(username) {
+              $rootScope.userName = username;
+
+              $log.info("in get user", $rootScope.userName);
+            });
+          }
+        }
       }
     ]);
 

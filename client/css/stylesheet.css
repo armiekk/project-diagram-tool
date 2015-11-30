@@ -580,3 +580,9 @@ div#image-canvas img {
   height: 50px;
   text-align: center;
 }
+
+.tool-container {
+  width: inherit;
+  height: 600px;
+  padding-top: 20px;
+}

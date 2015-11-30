@@ -1,0 +1,191 @@
+<!-- modal overlay -->
+<div class="modal-overlay" ng-show="modal.overlay" ng-click="closeModal()"></div>
+<!-- modal save -->
+<div class="modal-save" ng-show="modal.save">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <strong>Save Diagram</strong>
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="name">save diagram as...</label>
+        <input type="text" class="form-control" ng-model="myDiagram.diagramName" name="name" value="">
+      </div>
+      <div class="pull-right">
+        <button type="button"
+                class="btn btn-primary btn-sm"
+                name="button"
+                ng-click="saveAsDiagram(myDiagram)">save</button>
+        <button type="button"
+                class="btn btn-link btn-sm btn-cancel"
+                name="button"
+                ng-click="closeModal()">cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal import -->
+<div class="modal-import" ng-show="modal.import">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      select JSON file to import
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        <input type="file" class="well" nv-file-select uploader="uploader">
+      </div>
+      <div class="pull-right">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          name="save"
+          ng-disabled="Upload.isValid()"
+          ng-click="uploader.uploadAll()">import</button>
+        <button
+          type="button"
+          class="btn btn-link btn-sm btn-cancel"
+          name="cancel"
+          ng-click="closeModal()">cacel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal export -->
+<div class="modal-export-json" ng-show="modal.exportJson">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Export diagram to JSON
+    </div>
+    <div class="panel-body">
+      <strong>Export as...</strong>
+      <div class="form-group">
+        <input type="text" ng-model="myDiagram.diagramName" class="form-control" name="exportName">
+      </div>
+      <div class="pull-right">
+        <button type="button"
+                class="btn btn-primary btn-sm"
+                name="button"
+                ng-click="exportJSON(myDiagram)">export</button>
+        <button type="button"
+                class="btn btn-link btn-sm btn-cancel"
+                name="button"
+                ng-click="closeModal()">cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-export-image" ng-show="modal.exportImage">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Export diagram to image
+    </div>
+    <div class="panel-body">
+      <strong>Export as...</strong>
+      <div class="form-group">
+        <input type="text" ng-model="myDiagram.diagramName" class="form-control" name="exportName">
+      </div>
+      <div class="pull-right">
+        <button type="button"
+                class="btn btn-primary btn-sm"
+                name="button"
+                ng-click="exportImage(myDiagram, init)">export</button>
+        <button type="button"
+                class="btn btn-link btn-sm btn-cancel"
+                name="button"
+                ng-click="closeModal()">cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- main diagram -->
+<div class="row" style="margin-top: 20px;">
+  <div class="col-md-2">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <strong>Components</strong>
+      </div>
+      <!-- <div class="panel-body" id="leftPalette" style="width: Auto; height: 500px;"></div> -->
+      <flowchart-diagram></flowchart-diagram>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="panel panel-primary">
+      <div class="panel-heading panel-heading-diagram">
+        <button class="btn btn-link btn-sm"
+                id="new"
+                ng-click="newDiagram()"
+                type="button"><i class="fa fa-plus-circle"></i> new
+        </button>
+        <button class="btn btn-link btn-sm"
+                id="saveModel"
+                ng-click="saveDiagram(myDiagram)"
+                type="button"><i class="fa fa-floppy-o"></i> save
+        </button>
+        <button
+                class="btn btn-link btn-sm"
+                id="undo"
+                ng-click="undo(myDiagram.diagramDetail)"
+                type="button"><i class="fa fa-undo"></i> undo
+        </button>
+        <button
+                class="btn btn-link btn-sm"
+                id="redo"
+                ng-click="redo(myDiagram.diagramDetail)"
+                type="button"><i class="fa fa-repeat"></i> redo
+        </button>
+        <div class="pull-right">
+          <button class="btn btn-link btn-sm"
+                  id="exportModel"
+                  ng-click="modal.import = !modal.import;modal.overlay = !modal.overlay"
+                  type="button"><i class="fa fa-download"></i> import
+          </button>
+          <div class="dropdown">
+            <button class="btn btn-link btn-sm"
+                    id="exportModel"
+                    name="button"
+                    type="button"><i class="fa fa-upload"></i> export
+            </button>
+            <ul class="dropdown-list">
+              <li>
+                <a href="" ng-click="modal.exportJson = !modal.exportJson;modal.overlay = !modal.overlay">
+                  export to JSON
+                </a>
+              </li>
+              <li>
+                <a href="" ng-click="modal.exportImage = !modal.exportImage;modal.overlay = !modal.overlay">
+                  export to image
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body" id="erDiagram" style="width: Auto; height: 500px;"></div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <strong>Your Diagram</strong>
+        <div class="pull-right">
+          <button type="button"
+                  class="btn btn-link btn-sm"
+                  ng-click="deleteDiagram(temp)">
+            <i class="fa fa-trash-o"></i> delete
+          </button>
+        </div>
+      </div>
+      <div class="panel-body well" style="width: Auto; height: 500px;">
+        <select class="form-control" size="7">
+          <option
+              ng-repeat="diagram in diagramList"
+              ng-click="selectDiagram(diagram)"
+              ng-dblclick="loadDiagram(diagram)">
+              {{diagram.diagramName}}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
