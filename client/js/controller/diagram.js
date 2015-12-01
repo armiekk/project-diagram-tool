@@ -15,9 +15,10 @@
     $scope.myDiagram = {
       userName: $rootScope.userName,
       diagramName: "",
-      diagramDetail: $scope.init.model,
+      diagramDetail: [],
       category: $location.path().split("/")[2]
-    };
+    };;
+    $scope.myDiagram.diagramDetail = $scope.init.model;
     $scope.modal = Modal.modalTrigger();
     $scope.uploader = Upload.init();
     $scope.uploader.onCompleteItem = onCompleteItem;
@@ -37,7 +38,7 @@
 
     function saveAsDiagram(myDiagram){
       $log.info(myDiagram);
-      DiagramServices.saveDiagram(myDiagram, function(){
+      DiagramServices.createDiagram(myDiagram, function(){
         loadDiagramList();
         closeModal();
       });
@@ -47,6 +48,7 @@
         $scope.modal.save = !$scope.modal.save;
         $scope.modal.overlay = !$scope.modal.overlay;
       }else {
+        $log.info("in save diagram",myDiagram);
         DiagramServices.updateDiagram(myDiagram, function(){
           loadDiagramList();
         });
@@ -63,6 +65,7 @@
       $scope.modal = Modal.closeModal();
     }
     function loadDiagramList(){
+      $log.info("in load diagram list",$scope.myDiagram);
       DiagramServices.loadDiagramList($scope.myDiagram.userName, function(result) {
         $scope.diagramList = result;
       });

@@ -40,16 +40,16 @@
         })
         .state('toolsApp.Prototype', {
           url: "/Prototype",
-          templateUrl: "view/prototype.html",
-          controller: "prototypeCtrl",
+          templateUrl: "view/diagram/prototype.html",
+          controller: "diagramCtrl",
           authenticate: true
         });
       $locationProvider.html5Mode(true);
     })
-    .run(['$rootScope', '$state', '$log', 'AuthService', 'fbServices',
-      function($rootScope, $state, $log, AuthService, fbServices) {
-        getUser();
+    .run(['$rootScope', '$state', '$log', 'AuthService', 'fbServices', '$location',
+      function($rootScope, $state, $log, AuthService, fbServices, $location) {
         $rootScope.$on('$stateChangeStart', function(event, next) {
+          getUser();
           if (next.authenticate && !AuthService.isAuthenticated) {
             event.preventDefault();
             $state.go("home");
@@ -59,9 +59,8 @@
         });
         function getUser() {
           if (AuthService.isAuthenticated) {
-            AuthService.getCurrent(function(username) {
-              $rootScope.userName = username;
-
+            AuthService.getCurrent(function(value) {
+              $rootScope.userName = value;
               $log.info("in get user", $rootScope.userName);
             });
           }

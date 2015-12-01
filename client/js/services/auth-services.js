@@ -10,10 +10,7 @@
     function login(user) {
       return User
         .login(user)
-        .$promise
-        .then(function(response) {
-          $log.info(response);
-        });
+        .$promise;
     }
 
     function logout() {

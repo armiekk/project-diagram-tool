@@ -8,7 +8,7 @@
     function diagram($rootScope, $log, $window, Diagram, GoJS, SaveFile){
 
 
-      function saveDiagram(diagramParam, callback){
+      function createDiagram(diagramParam, callback){
         diagramParam.diagramDetail = JSON.parse(diagramParam.diagramDetail.toJson());
         $log.info("in service", diagramParam);
         Diagram.create(diagramParam, function(value, responseHeaders){
@@ -75,7 +75,7 @@
       }
 
       return {
-        saveDiagram: saveDiagram,
+        createDiagram: createDiagram,
         loadDiagramList: loadDiagramList,
         exportJSON: exportJSON,
         exportImage: exportImage,
