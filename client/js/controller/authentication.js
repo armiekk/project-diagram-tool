@@ -28,7 +28,7 @@
         AuthService.register(user)
           .then(function() {
             $window.alert("Register Successful");
-            $state.go("home");
+            $state.go("login");
           });
       }else {
         $window.alert("password not match !");
@@ -39,7 +39,7 @@
       AuthService.login(user)
         .then(function(response) {
           $rootScope.userName = response.user.username;
-          $state.go("toolsApp.flowChart");
+          $state.go("tools.flowChart");
         });
     }
 

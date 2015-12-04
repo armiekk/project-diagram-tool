@@ -39,7 +39,7 @@
                   AuthService.login(user)
                     .then(function(response) {
                       $rootScope.userName = response.user.username;
-                      $state.go("toolsApp.flowChart");
+                      $state.go("tools.flowChart");
                     });
                 });
               });
@@ -55,7 +55,7 @@
             AuthService.login(user)
               .then(function(response) {
                 $rootScope.userName = response.user.username;
-                $state.go("toolsApp.flowChart");
+                $state.go("tools.flowChart");
               });
           });
         }

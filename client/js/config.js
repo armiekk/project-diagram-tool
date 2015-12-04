@@ -19,29 +19,26 @@
           templateUrl: "view/register.html",
           controller: "authCtrl"
         })
-        .state("toolsApp", {
+        .state("login", {
+          url: "/login",
+          templateUrl: "view/login.html",
+          controller: "authCtrl"
+        })
+        .state("tools", {
           abstract: true,
-          url: "/toolsApp",
+          url: "/tools",
           templateUrl: "view/tools.html",
-          controller: "toolsApp",
+          controller: "diagramCtrl",
           authenticate: true
         })
-        .state('toolsApp.flowChart', {
+        .state('tools.flowChart', {
           url: "/flowChart",
-          templateUrl: "view/diagram/flowchart.html",
-          controller: "diagramCtrl",
+          template: "<flowchart-diagram></flowchart-diagram>",
           authenticate: true
         })
-        .state('toolsApp.ER', {
+        .state('tools.ER', {
           url: "/ER",
-          templateUrl: "view/diagram/er.html",
-          controller: "diagramCtrl",
-          authenticate: true
-        })
-        .state('toolsApp.Prototype', {
-          url: "/Prototype",
-          templateUrl: "view/diagram/prototype.html",
-          controller: "diagramCtrl",
+          template: "<er-diagram></er-diagram>",
           authenticate: true
         });
       $locationProvider.html5Mode(true);

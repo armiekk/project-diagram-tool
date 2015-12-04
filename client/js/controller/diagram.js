@@ -21,9 +21,10 @@
     $scope.myDiagram.diagramDetail = $scope.init.model;
     $scope.modal = Modal.modalTrigger();
     $scope.uploader = Upload.init();
-    $scope.uploader.onCompleteItem = onCompleteItem;
+
+    $scope.uploader.onCompleteItem = onUploadComplete;
     $scope.newDiagram = newDiagram;
-    $scope.saveAsDiagram = saveAsDiagram;
+    $scope.saveNewDiagram = saveNewDiagram;
     $scope.saveDiagram = saveDiagram;
     $scope.loadDiagram = loadDiagram;
     $scope.selectDiagram = selectDiagram;
@@ -33,10 +34,11 @@
     $scope.undo = undo;
     $scope.exportJSON = exportJSON;
     $scope.exportImage = exportImage;
+    $scope.openDrawer = openDrawer;
 
     loadDiagramList();
 
-    function saveAsDiagram(myDiagram){
+    function saveNewDiagram(myDiagram){
       $log.info(myDiagram);
       DiagramServices.createDiagram(myDiagram, function(){
         loadDiagramList();
@@ -101,7 +103,7 @@
       DiagramServices.exportImage(myDiagram, init);
       closeModal();
     }
-    function onCompleteItem(item, response, status, headers) {
+    function onUploadComplete(item, response, status, headers) {
       console.info('Complete', item.file.name);
       $http.get('/api/containers/container1/download/' + item.file.name).then(function(value) {
         $scope.init.model = new go.GraphLinksModel();
@@ -111,6 +113,10 @@
         closeModal();
       });
     };
+    function openDrawer(){
+      $scope.modal.overlay = true;
+      $scope.modal.drawer = true;
+    }
 
   }
 

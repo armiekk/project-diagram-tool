@@ -20,16 +20,12 @@ module.exports = function(app){
     res.sendFile(path.resolve(__dirname, "../../client/index.html"));
   });
 
-  app.get("/toolsApp*", function(req, res){
+  app.get("/tools*", function(req, res){
     res.sendFile(path.resolve(__dirname, "../../client/index.html"));
   });
 
-  app.get("/export", function(req, res){
-    var file = "/home/armst0910/work/project-diagram-tool/server/storage/json/temp.json";
-    // jsonfile.writeFile(file, req.query.diagramDetail, function (err) {
-    //   if(err) console.error("write JSON", err);
-    // });
-    res.download(file);
+  app.get("/login*", function(req, res){
+    res.sendFile(path.resolve(__dirname, "../../client/index.html"));
   });
 
 }

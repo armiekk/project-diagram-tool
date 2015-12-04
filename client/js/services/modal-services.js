@@ -11,7 +11,8 @@
         overlay: false,
         import: false,
         exportJson: false,
-        exportImage: false
+        exportImage: false,
+        drawer: false
       };
       function modalTrigger(){
         return modal;

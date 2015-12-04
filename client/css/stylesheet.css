@@ -47,7 +47,6 @@
   z-index: 99999;
   opacity: 0;
 }
-
 .modal-export-image.ng-hide {
   width: 500px;
   height: 0px;
@@ -60,7 +59,6 @@
   z-index: 99999;
   opacity: 0;
 }
-
 .modal-login.ng-hide {
   position: absolute;
   visibility: hidden;
@@ -73,7 +71,6 @@
   background-color: white;
   border-radius: 8px 8px 4px 4px;
 }
-
 .modal-overlay {
   visibility: visible;
   position: fixed;
@@ -121,7 +118,6 @@
   z-index: 99999;
   opacity: 1;
 }
-
 .modal-export-image {
   width: 500px;
   height: 0px;
@@ -134,7 +130,6 @@
   z-index: 99999;
   opacity: 1;
 }
-
 .modal-login {
   position: absolute;
   visibility: visible;
@@ -146,7 +141,6 @@
   left: 450px;
   background-color: white;
   border-radius: 8px 8px 4px 4px;
-
 }
 .modal-overlay.ng-hide-add, .modal-overlay.ng-hide-remove {
   transition: all 0.4s ease 0.1s;
@@ -166,7 +160,6 @@
 .modal-login.ng-hide-add, .modal-login.ng-hide-remove {
   transition: all 0.4s ease 0.1s;
 }
-
 .panel-heading.panel-heading-diagram {
   padding-bottom: 5px;
 }
@@ -260,12 +253,11 @@ strong.username {
   margin-bottom: 18px;
   box-shadow: 0px 1px 5px #888888;
 }
-
 .bg-header h1 {
   margin: 0;
   padding-top: 200px;
   text-align: center;
-  font-family: 'Open Sans',sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 800;
   color: #F5F5F5;
 }
@@ -276,12 +268,10 @@ strong.username {
   font-weight: 400;
   color: #F5F5F5;
 }
-
 .button-align {
   padding: 16px 16px 0 0;
   text-align: right;
 }
-
 .header-button {
   width: inherit;
   height: inherit;
@@ -294,7 +284,6 @@ strong.username {
   border: solid 1px #ffffff;
   transition: all 0.4s;
 }
-
 .header-button:hover {
   width: inherit;
   height: inherit;
@@ -306,7 +295,6 @@ strong.username {
   border-radius: 1px;
   border: solid 1px #ffffff;
 }
-
 .try-button {
   width: 150px;
   height: inherit;
@@ -319,7 +307,6 @@ strong.username {
   border: solid 1px #ffffff;
   transition: all 0.4s;
 }
-
 .try-button:hover {
   width: 150px;
   height: inherit;
@@ -331,33 +318,28 @@ strong.username {
   border-radius: 1px;
   border: solid 1px #ffffff;
 }
-
 span.header-text > a {
-  font-family: 'Open Sans',sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 14px;
   margin-right: 8px;
   color: white;
 }
-
-span.header-text{
-  font-family: 'Open Sans',sans-serif;
+span.header-text {
+  font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 13px;
   margin-right: 8px;
   color: white;
 }
-
 .button-middle {
   margin-top: 20px;
   text-align: center;
 }
-
 .modal-login > .login-panel {
   width: auto;
   height: auto;
 }
-
 .login-panel.header {
   width: auto;
   height: 120px;
@@ -367,36 +349,30 @@ span.header-text{
   color: white;
   border-radius: 8px 8px 0 0;
 }
-
 .login-panel.header > .header-text > .text {
   display: block;
   font-size: 16px;
   font-weight: 800;
-  font-family: 'Open Sans',sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
-
 .login-panel.body {
   width: auto;
   height: inherit;
   padding: 16px;
 }
-
 .login-panel.body > .space-devide {
   font-size: 16px;
   display: block;
   text-align: center;
 }
-
 .login-form {
   position: relative;
   width: 100%;
   height: auto;
 }
-
 .login-form.group {
   margin: 30px 0 24px 0;
 }
-
 .float-label {
   top: 10;
   bottom: 0;
@@ -408,31 +384,26 @@ span.header-text{
   pointer-events: none;
   transition: all 0.2s;
 }
-
 .input-form {
   width: 100%;
   height: 40px;
 }
-
 .input-form:focus + .float-label {
   top: 0;
   left: -5px;
   margin-top: -20px;
   font-size: 13px;
 }
-
 .input-form:valid + .float-label {
   top: 0;
   left: -5px;
   margin-top: -20px;
   font-size: 13px;
 }
-
 .login-panel.footer {
   text-align: right;
   padding-right: 16px;
 }
-
 .login-button {
   width: 100%;
   height: 40px;
@@ -446,7 +417,6 @@ span.header-text{
   border: solid 1px #000000;
   transition: all 0.4s;
 }
-
 .login-button.facebook {
   background: rgba(41, 98, 255, 0);
   color: rgba(41, 98, 255, 1);
@@ -454,7 +424,6 @@ span.header-text{
   border: solid 1px rgba(41, 98, 255, 1);
   transition: all 0.4s;
 }
-
 .login-button:hover {
   width: 100%;
   height: 40px;
@@ -466,7 +435,6 @@ span.header-text{
   border-radius: 1px;
   border: solid 1px #000000;
 }
-
 .login-button.facebook:hover {
   background: rgba(41, 98, 255, 1);
   color: #ffffff;
@@ -474,52 +442,61 @@ span.header-text{
   border: solid 1px rgba(41, 98, 255, 1);
   transition: all 0.4s;
 }
-
 .register {
   width: 100%;
-  height: 680px;
+  height: 643px;
   margin: 0 auto;
   background-image: url(../img/bg-register.png);
 }
-
-h1.reg-header {
-  font-family: "Open Sans",sans-serif;
+.reg-header {
+  font-family: "Open Sans", sans-serif;
   font-weight: 800;
   color: white;
-  padding-top: 50px;
+  padding-top: 40px;
   text-align: center;
   margin: 0;
 }
-
+h2.reg-header {
+  padding-top: 0px;
+}
 .register-panel {
   width: 50%;
-  height: 65%;
+  display: block;
+  overflow: auto;
+  margin: 16px auto 0px auto;
+  padding-bottom: 24px;
+  border-radius: 4px;
+  opacity: 0.7;
+  background-color: #ffffff;
+}
+.login-panel.panel-lg {
+  width: 30%;
+  display: block;
+  overflow: auto;
   margin: 16px auto 0px auto;
   padding: 4px;
   border-radius: 4px;
   opacity: 0.7;
-  background-color: #212121;
+  background-color: #ffffff;
 }
-
 .register-body {
-  height: 100%;
-  font-family: 'Open Sans',sans-serif;
+  display: block;
+  overflow: auto;
+  font-family: 'Open Sans', sans-serif;
   color: white;
   border-radius: 4px;
 }
-
 .reg-column {
   text-align: center;
   color: black;
 }
-
 .reg-column > h3 {
-  font-family: "Open Sans",sans-serif;
-  color: white;
+  font-family: "Open Sans", sans-serif;
+  color: rgb(100, 100, 100);
+  ;
   font-weight: 600;
   margin-top: 30%;
 }
-
 .signup-button {
   width: 100%;
   height: 40px;
@@ -537,19 +514,16 @@ h1.reg-header {
   color: #ffffff;
   background: #4CAF50;
 }
-
 .drawer-header {
   padding: 8px 0 8px 16px;
   background: #212121;
 }
-
 .drawer-header .drawer-title {
   font-size: 40px;
   font-weight: 800;
   font-family: "Open Sans", sans-serif;
   color: #ffffff;
 }
-
 .drawer-navigation .drawer-navigation-link {
   display: block;
   width: auto;
@@ -560,27 +534,22 @@ h1.reg-header {
   padding-left: 16px;
   color: #212121;
 }
-
 .export-image {
   width: inherit;
   margin: 0 auto;
 }
-
 div#image-canvas img {
   margin: 0 auto;
 }
-
 .drawer-navigation .drawer-navigation-link:hover {
   color: #ffffff;
   background: #212121;
 }
-
 .main-well {
   width: auto;
   height: 50px;
   text-align: center;
 }
-
 .tool-container {
   width: inherit;
   height: 600px;
