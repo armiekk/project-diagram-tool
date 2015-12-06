@@ -1,27 +1,27 @@
-
-<div class="modal-overlay" ng-show="modal.overlay" ng-click="closeModal()"></div>
+<div class="modal-overlay" ng-click="closeModal()" ng-show="modal.overlay"></div>
 <div class="modal-login" ng-show="modal.login">
   <div class="login-panel">
     <div class="login-panel header">
       <div class="header-text">
         <span class="fa fa-lock fa-3x"></span>
-        <span class="text">LOGIN TO DIATOOLS </span>
+        <span class="text">LOGIN TO DIATOOLS
+        </span>
       </div>
     </div>
     <div class="login-panel body">
       <div class="login-form">
         <div class="login-form group">
-          <input type="text" class="input-form" name="user" ng-model="user.username" required>
-          <label for="user" class="float-label">E-mail or username</label>
+          <input class="input-form" name="user" ng-model="user.username" required type="text">
+          <label class="float-label" for="user">E-mail or username</label>
         </div>
         <div class="login-form group">
-          <input type="password" class="input-form" name="password" ng-model="user.password" required>
-          <label for="password" class="float-label">Password</label>
+          <input class="input-form" name="password" ng-model="user.password" required type="password">
+          <label class="float-label" for="password">Password</label>
         </div>
       </div>
-      <button type="button" class="login-button" ng-click="login(user)">LOG IN</button>
+      <button class="login-button" ng-click="login(user)" type="button">LOG IN</button>
       <span class="space-devide">or</span>
-      <button type="button" class="login-button facebook" ng-click="facebookLogin()">LOG IN WITH FACEBOOK</button>
+      <button class="login-button facebook" ng-click="facebookLogin()" type="button">LOG IN WITH FACEBOOK</button>
     </div>
     <div class="login-panel footer">
       forgot password
@@ -31,50 +31,114 @@
 <header>
   <div class="bg-header">
     <div class="button-align">
-      <span class="header-text"><a href="" ui-sref="register">register</a> or </span>
-      <button type="button" class="header-button" ng-click="showLoginModal()">LOGIN</button>
+      <span class="header-text">
+        <a href="" ui-sref="register">register</a>
+        or
+      </span>
+      <button class="header-button" ng-click="showLoginModal()" type="button">LOGIN</button>
     </div>
     <h1>DIATOOLS</h1>
     <h2>Design and create workflow diagram</h2>
     <div class="button-middle">
-      <button type="button" class="try-button" >TRY IT!</button>
+      <button class="try-button" type="button">TRY IT!</button>
     </div>
   </div>
 </header>
 <main class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="jumbotron">
-
-      </div>
+      <h1 class="title">Features</h1>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
-      <div class="main-well">
-        <span><i class="fa fa-pencil fa-3x"></i></span>
+    <div class="col-md-3">
+      <div class="well fearure-well">
+        <span>
+          <i class="fa fa-lightbulb-o fa-2x"></i>
+        </span>
+        <p class="feature-desc">
+          Design your workflow or make the idea that will help you improve your task.
+        </p>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="main-well">
-        <span><i class="fa fa-download fa-3x"></i></span>
+    <div class="col-md-3">
+      <div class="well fearure-well">
+        <span>
+          <i class="fa fa-pencil fa-2x"></i>
+        </span>
+        <p class="feature-desc">
+          Get things in your mind to create, edit, and save your idea in application.
+        </p>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="main-well">
-        <span><i class="fa fa-upload fa-3x"></i></span>
+    <div class="col-md-3">
+      <div class="well fearure-well">
+        <span>
+          <i class="fa fa-download fa-2x"></i>
+        </span>
+        <p class="feature-desc">
+          Import JSON files that describe the detail of diagram in your application.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="well fearure-well">
+        <span>
+          <i class="fa fa-upload fa-2x"></i>
+        </span>
+        <p class="feature-desc">
+          Export to JSON file for portable to your friends or get the images of your things.
+        </p>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <h1>Example</h1>
-      <div class="" style="width: auto; height: 500px;">
+      <h1 class="title">Powered By</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+      <div class="well powered-by-well">
+        <div class="row">
 
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="row">
+
+        </div>
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="title">Example</h1>
+      <div class="" style="width: auto; height: 500px;"></div>
+    </div>
+  </div>
 </main>
-<footer class="" style="width: auto; height: 100px;background-color: #212121;box-shadow: 0px -1px 5px #424242;">
-
+<footer class="mdl-mini-footer register-page">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">CDG System .co.ltd</div>
+    <ul class="mdl-mini-footer__link-list">
+      <li>
+        <a href="">Kampnart Kengpohnsakul</a>
+      </li>
+    </ul>
+  </div>
+  <div class="mdl-mini-footer__right-section">
+    <ul class="mdl-mini-footer__link-list">
+      <li>
+        <a href="">Contact us.</a>
+      </li>
+    </ul>
+  </div>
 </footer>

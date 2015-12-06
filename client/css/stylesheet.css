@@ -65,7 +65,8 @@
   opacity: 0;
   z-index: 99999;
   width: 400px;
-  height: 500px;
+  display: block;
+  overflow: auto;
   top: 150px;
   left: 450px;
   background-color: white;
@@ -136,7 +137,8 @@
   opacity: 1;
   z-index: 99999;
   width: 400px;
-  height: 500px;
+  display: block;
+  overflow: auto;
   top: 100px;
   left: 450px;
   background-color: white;
@@ -336,9 +338,10 @@ span.header-text {
   margin-top: 20px;
   text-align: center;
 }
-.modal-login > .login-panel {
+.modal-login .login-panel {
   width: auto;
-  height: auto;
+  display: block;
+  overflow: auto;
 }
 .login-panel.header {
   width: auto;
@@ -357,8 +360,9 @@ span.header-text {
 }
 .login-panel.body {
   width: auto;
-  height: inherit;
-  padding: 16px;
+  display: block;
+  overflow: auto;
+  padding: 36px 24px 36px 24px;
 }
 .login-panel.body > .space-devide {
   font-size: 16px;
@@ -371,10 +375,11 @@ span.header-text {
   height: auto;
 }
 .login-form.group {
-  margin: 30px 0 24px 0;
+  position: inherit;
+  margin-bottom: 48px;
 }
 .float-label {
-  top: 10;
+  top: 0;
   bottom: 0;
   left: 0;
   margin-left: 4px;
@@ -400,9 +405,16 @@ span.header-text {
   margin-top: -20px;
   font-size: 13px;
 }
+.input-form:invalid + .float-label {
+  top: 0;
+  left: -5px;
+  margin-top: -20px;
+  font-size: 13px;
+}
 .login-panel.footer {
   text-align: right;
   padding-right: 16px;
+  margin-bottom: 6px;
 }
 .login-button {
   width: 100%;
@@ -444,15 +456,17 @@ span.header-text {
 }
 .register {
   width: 100%;
-  height: 643px;
+  display: block;
+  overflow: auto;
   margin: 0 auto;
+  padding-bottom: 48px;
   background-image: url(../img/bg-register.png);
 }
 .reg-header {
   font-family: "Open Sans", sans-serif;
   font-weight: 800;
   color: white;
-  padding-top: 40px;
+  padding-top: 12px;
   text-align: center;
   margin: 0;
 }
@@ -464,7 +478,6 @@ h2.reg-header {
   display: block;
   overflow: auto;
   margin: 16px auto 0px auto;
-  padding-bottom: 24px;
   border-radius: 4px;
   opacity: 0.7;
   background-color: #ffffff;
@@ -489,6 +502,7 @@ h2.reg-header {
 .reg-column {
   text-align: center;
   color: black;
+  margin: 36px 0 24px 0;
 }
 .reg-column > h3 {
   font-family: "Open Sans", sans-serif;
@@ -545,13 +559,50 @@ div#image-canvas img {
   color: #ffffff;
   background: #212121;
 }
-.main-well {
-  width: auto;
-  height: 50px;
+.well.fearure-well {
+  border-radius: 2px;
+  height: 200px;
+  background-color: #EEEEEE;
+  text-align: center;
+  padding: 30px 12px 8px 12px;
+}
+.well.powered-by-well {
+  border-radius: 2px;
+  display: block;
+  overflow: auto;
+  background-color: #EEEEEE;
   text-align: center;
 }
 .tool-container {
   width: inherit;
   height: 600px;
   padding-top: 20px;
+}
+div.msg-validate {
+  float: right;
+  display: block;
+}
+div.msg-validate span {
+  color: rgba(255, 0, 0, 0.7);
+}
+footer.mdl-mini-footer.register-page {
+  background-color: #212121;
+}
+
+h1.title {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+}
+
+p.feature-desc {
+  font-family: "Open Sans", sans-serif;
+  font-size: 15px;
+  margin-top: 30px;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  box-shadow: 1px 1px 2px #888888;
 }

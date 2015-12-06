@@ -4,37 +4,81 @@
     <div class="register-body">
       <div class="col-md-6">
         <div class="reg-column">
-          <div class="login-form">
+          <form name="form" class="login-form" novalidate>
             <div class="login-form group">
-              <input type="text" class="input-form" name="user" ng-model="user.username" required>
-              <label for="user" class="float-label">Username :</label>
+              <input  type="text" class="input-form" name="username"
+                      ng-model="user.username" required pattern="[a-zA-Z0-9]*">
+              <label for="username" class="float-label">Username :</label>
+              <div class="msg-validate" ng-messages="form.username.$error">
+                <span ng-message="pattern">Invalid username.</span>
+                <span ng-message="required">Username must be a letter and number.</span>
+              </div>
             </div>
             <div class="login-form group">
               <input type="text" class="input-form" name="fname" ng-model="user.fullname" required>
               <label for="fname" class="float-label">Full name :</label>
+              <div class="msg-validate" ng-messages="form.fname.$error">
+                <span ng-message="required">Require fullname.</span>
+              </div>
             </div>
             <div class="login-form group">
-              <input type="text" class="input-form" name="email" ng-model="user.email" required>
-              <label for="email" class="float-label">E-mail :</label>
+              <input type="email" class="input-form" name="uEmail" ng-model="user.email" required>
+              <label for="uEmail" class="float-label">E-mail :</label>
+              <div class="msg-validate" ng-messages="form.uEmail.$error">
+                <span ng-message="email">Invalid email.</span>
+                <span ng-message="required">Require email.</span>
+              </div>
             </div>
             <div class="login-form group">
-              <input type="password" class="input-form" name="pw" ng-model="user.password" required>
+              <input type="password" class="input-form" pattern="[a-zA-Z0-9]*"
+                    name="pw" ng-model="user.password" required>
               <label for="password" class="float-label">Password :</label>
+              <div class="msg-validate" ng-messages="form.pw.$error">
+                <span ng-message="pattern">Invalid password.</span>
+                <span ng-message="required">Password must be a letter and number.</span>
+              </div>
             </div>
             <div class="login-form group">
-              <input type="password" class="input-form" name="repw" ng-model="user.rePassword" required>
+              <input type="password" class="input-form" pattern="[a-zA-Z0-9]*"
+                    name="repw" ng-model="user.rePassword" required>
               <label for="repw" class="float-label">Re-type Password :</label>
+              <div class="msg-validate" ng-messages="form.repw.$error">
+                <span ng-message="pattern">Invalid password.</span>
+                <span ng-message="required">Retype password.</span>
+                <span ng-show="(user.rePassword !== user.password) && user.rePassword !== undefined">
+                  Password not match.
+                </span>
+              </div>
             </div>
-          </div>
-          <button type="button" class="signup-button" ng-click="register(user)">REGISTER</button>
+            <button
+            type="button"
+            class="signup-button"
+            ng-click="register(user)"
+            ng-disabled="!form.$valid">
+              REGISTER
+            </button>
+          </form>
         </div>
       </div>
       <div class="col-md-6">
         <div class="reg-column">
-          <h3>or login with Facebook</h3>
+          <h3>Or login with Facebook</h3>
           <button type="button" class="login-button facebook" ng-click="facebookLogin()">LOGIN WITH FACEBOOK</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+<footer class="mdl-mini-footer register-page">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">CDG System .co.ltd</div>
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="">Kampnart Kengpohnsakul</a></li>
+    </ul>
+  </div>
+  <div class="mdl-mini-footer__right-section">
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="">Contact us.</a></li>
+    </ul>
+  </div>
+</footer>
