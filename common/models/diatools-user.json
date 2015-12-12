@@ -1,11 +1,17 @@
 {
   "name": "DiatoolsUser",
   "base": "User",
-  "idInjection": true,
+  "idInjection": false,
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "userId": {
+      "type": "Number",
+      "id": true,
+      "generated": true
+    }
+  },
   "validations": [],
   "relations": {},
   "acls": [],

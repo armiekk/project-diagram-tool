@@ -7,20 +7,33 @@
         <div class="login-form">
           <div class="login-form group">
             <input type="text" class="input-form" name="user" ng-model="user.username" required>
-            <label for="user" class="float-label">E-mail or username</label>
+            <label for="user" class="float-label">Username :</label>
           </div>
           <div class="login-form group">
             <input type="password" class="input-form" name="password" ng-model="user.password" required>
-            <label for="password" class="float-label">Password</label>
+            <label for="password" class="float-label">Password :</label>
           </div>
         </div>
         <button type="button" class="login-button" ng-click="login(user)">LOG IN</button>
         <span class="space-devide">or</span>
         <button type="button" class="login-button facebook" ng-click="facebookLogin()">LOG IN WITH FACEBOOK</button>
       </div>
-      <div class="login-panel footer">
+      <!-- <div class="login-panel footer">
         forgot password
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
+<footer class="mdl-mini-footer register-page">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">CDG System .co.ltd</div>
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="">Kampnart Kengpohnsakul</a></li>
+    </ul>
+  </div>
+  <div class="mdl-mini-footer__right-section">
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="">Contact us.</a></li>
+    </ul>
+  </div>
+</footer>

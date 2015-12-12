@@ -16,10 +16,9 @@
   height: 0px;
   visibility: hidden;
   position: fixed;
-  top: 250px;
-  right: 0;
-  bottom: 0;
-  left: 500px;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
   z-index: 99999;
   opacity: 0;
 }
@@ -28,10 +27,9 @@
   height: 0px;
   visibility: hidden;
   position: fixed;
-  top: 250px;
-  right: 0;
-  bottom: 0;
-  left: 27%;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
   z-index: 99999;
   opacity: 0;
 }
@@ -40,10 +38,9 @@
   height: 0px;
   visibility: hidden;
   position: fixed;
-  top: 150px;
-  right: 0;
-  bottom: 0;
-  left: 30%;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
   z-index: 99999;
   opacity: 0;
 }
@@ -52,10 +49,9 @@
   height: 0px;
   visibility: hidden;
   position: fixed;
-  top: 150px;
-  right: 0;
-  bottom: 0;
-  left: 30%;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
   z-index: 99999;
   opacity: 0;
 }
@@ -67,8 +63,9 @@
   width: 400px;
   display: block;
   overflow: auto;
-  top: 150px;
-  left: 450px;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
   background-color: white;
   border-radius: 8px 8px 4px 4px;
 }
@@ -88,10 +85,9 @@
   height: 0px;
   visibility: visible;
   position: fixed;
-  top: 200px;
-  right: 0;
-  bottom: 0;
-  left: 500px;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
   z-index: 99999;
   opacity: 1;
 }
@@ -100,10 +96,9 @@
   height: 0px;
   visibility: visible;
   position: fixed;
-  top: 200px;
-  right: 0;
-  bottom: 0;
-  left: 27%;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
   z-index: 99999;
   opacity: 1;
 }
@@ -112,10 +107,9 @@
   height: 0px;
   visibility: visible;
   position: fixed;
-  top: 100px;
-  right: 0;
-  bottom: 0;
-  left: 30%;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
   z-index: 99999;
   opacity: 1;
 }
@@ -124,10 +118,9 @@
   height: 0px;
   visibility: visible;
   position: fixed;
-  top: 100px;
-  right: 0;
-  bottom: 0;
-  left: 30%;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
   z-index: 99999;
   opacity: 1;
 }
@@ -139,8 +132,9 @@
   width: 400px;
   display: block;
   overflow: auto;
-  top: 100px;
-  left: 450px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   background-color: white;
   border-radius: 8px 8px 4px 4px;
 }
@@ -308,6 +302,7 @@ strong.username {
   border-radius: 1px;
   border: solid 1px #ffffff;
   transition: all 0.4s;
+  padding: 8px 12px 8px 12px;
 }
 .try-button:hover {
   width: 150px;
@@ -486,7 +481,7 @@ h2.reg-header {
   width: 30%;
   display: block;
   overflow: auto;
-  margin: 16px auto 0px auto;
+  margin: 50px auto 50px auto;
   padding: 4px;
   border-radius: 4px;
   opacity: 0.7;
@@ -560,18 +555,26 @@ div#image-canvas img {
   background: #212121;
 }
 .well.fearure-well {
-  border-radius: 2px;
+  border-radius: 4px;
   height: 200px;
   background-color: #EEEEEE;
   text-align: center;
   padding: 30px 12px 8px 12px;
 }
 .well.powered-by-well {
-  border-radius: 2px;
+  border-radius: 4px;
   display: block;
-  overflow: auto;
+  height: 200px;
   background-color: #EEEEEE;
   text-align: center;
+}
+.well.try-it-well {
+  border-radius: 4px;
+  display: block;
+  overflow: auto;
+  margin-bottom: 24px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 12px rgb(150, 150, 150);
 }
 .tool-container {
   width: inherit;
@@ -605,4 +608,32 @@ p.feature-desc {
   width: 100px;
   height: 100px;
   box-shadow: 1px 1px 2px #888888;
+}
+.powered-by-desc {
+  text-align: left;
+}
+
+.flash-custom-class {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  font-family: "Open Sans", sans-serif;
+  color: #F5F5F5;
+  background-color: #212121;
+  z-index: 99999;
+}
+
+
+.alertIn, .alertOut {
+    -webkit-transition: all 0.22s cubic-bezier(0.25, 0, 0.25, 1), opacity 0.22s cubic-bezier(0.25, 0, 0.25, 1);
+    -moz-transition: all 0.22s cubic-bezier(0.25, 0, 0.25, 1), opacity 0.22s cubic-bezier(0.25, 0, 0.25, 1);
+    -o-transition: all 0.22s cubic-bezier(0.25, 0, 0.25, 1), opacity 0.22s cubic-bezier(0.25, 0, 0.25, 1);
+    transition: all 0.22s cubic-bezier(0.25, 0, 0.25, 1), opacity 0.22s cubic-bezier(0.25, 0, 0.25, 1);
+}
+.alertIn.ng-hide-remove, .alertOut.ng-hide-add.ng-hide-add-active {
+    opacity: 0;
+}
+.alertOut.ng-hide-add, .alertIn.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
 }

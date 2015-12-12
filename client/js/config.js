@@ -45,6 +45,7 @@
     })
     .run(['$rootScope', '$state', '$log', 'AuthService', 'fbServices', '$location',
       function($rootScope, $state, $log, AuthService, fbServices, $location) {
+        getUser();
         $rootScope.$on('$stateChangeStart', function(event, next) {
           getUser();
           if (next.authenticate && !AuthService.isAuthenticated) {
@@ -58,7 +59,6 @@
           if (AuthService.isAuthenticated) {
             AuthService.getCurrent(function(value) {
               $rootScope.userName = value;
-              $log.info("in get user", $rootScope.userName);
             });
           }
         }

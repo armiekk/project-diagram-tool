@@ -4,13 +4,13 @@
   angular
     .module("app")
     .controller("authCtrl", ["$scope", "$rootScope", "AuthService",
-    "$window", "$state", "$log", "fbServices", "Facebook", "$location", authCtrl
+      "$window", "$state", "$log", "fbServices", "Facebook", "$location", authCtrl
     ]);
 
   function authCtrl($scope, $rootScope, AuthService, $window, $state, $log,
-     fbServices, Facebook, $location) {
-    getUser();
-    $scope.user;
+    fbServices, Facebook, $location) {
+
+    $scope.user = $rootScope.userName;
     $scope.modal = {
       login: false,
       overlay: false
@@ -30,7 +30,7 @@
             $window.alert("Register Successful");
             $state.go("login");
           });
-      }else {
+      } else {
         $window.alert("password not match !");
       }
     };
@@ -46,27 +46,21 @@
     function logout() {
       AuthService.logout()
         .then(function() {
-          $rootScope.userName = "";
+          $rootScope.userName = undefined;
           $state.go("home");
         });
     }
 
-    function getUser() {
-      if (AuthService.isAuthenticated) {
-        AuthService.getCurrent(function(username) {
-          $scope.user = username;
-        });
-      }
-    }
-
-    function showLoginModal(){
+    function showLoginModal() {
       $scope.modal.login = true;
       $scope.modal.overlay = true;
     }
 
-    function closeModal(){
+    function closeModal() {
       $scope.modal.login = false;
       $scope.modal.overlay = false;
     }
+
+
   }
 })();

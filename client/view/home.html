@@ -12,25 +12,25 @@
       <div class="login-form">
         <div class="login-form group">
           <input class="input-form" name="user" ng-model="user.username" required type="text">
-          <label class="float-label" for="user">E-mail or username</label>
+          <label class="float-label" for="user">Username :</label>
         </div>
         <div class="login-form group">
           <input class="input-form" name="password" ng-model="user.password" required type="password">
-          <label class="float-label" for="password">Password</label>
+          <label class="float-label" for="password">Password :</label>
         </div>
       </div>
       <button class="login-button" ng-click="login(user)" type="button">LOG IN</button>
       <span class="space-devide">or</span>
       <button class="login-button facebook" ng-click="facebookLogin()" type="button">LOG IN WITH FACEBOOK</button>
     </div>
-    <div class="login-panel footer">
+    <!-- <div class="login-panel footer">
       forgot password
-    </div>
+    </div> -->
   </div>
 </div>
 <header>
   <div class="bg-header">
-    <div class="button-align">
+    <div class="button-align" ng-hide="userName !== undefined">
       <span class="header-text">
         <a href="" ui-sref="register">register</a>
         or
@@ -39,8 +39,11 @@
     </div>
     <h1>DIATOOLS</h1>
     <h2>Design and create workflow diagram</h2>
-    <div class="button-middle">
-      <button class="try-button" type="button">TRY IT!</button>
+    <div class="button-middle" ng-hide="userName !== undefined">
+      <a class="try-button" href="" smooth-scroll target="tryIt" offset="90" type="button">TRY IT!</a>
+    </div>
+    <div class="button-middle" ng-show="userName !== undefined">
+      <a class="try-button" ui-sref="tools.flowChart" type="button">GO TO YOUR DIATOOLS!</a>
     </div>
   </div>
 </header>
@@ -98,33 +101,115 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-offset-2 col-md-8">
-      <div class="well powered-by-well">
-        <div class="row">
-
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="well powered-by-well">
+            <div class="row">
+              <div class="col-md-4">
+                <img alt="Node.js" src="../img/nodejs.png"/>
+              </div>
+              <div class="col-md-8">
+                <p class="powered-by-desc">
+                  <strong>Node.js</strong>
+                  is a JavaScript runtime built on Chrome's V8 JavaScript engine. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js' package ecosystem, npm, is the largest ecosystem of open source libraries in the world.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="row">
-
+        <div class="col-md-6">
+          <div class="well powered-by-well">
+            <div class="row">
+              <div class="col-md-4">
+                <img alt="Node.js" src="../img/strongloop.png"/>
+              </div>
+              <div class="col-md-8">
+                <p class="powered-by-desc">
+                  <strong>StrongLoop</strong>
+                  Built on top of the open source LoopBack framework, StrongLoop allows you to visually develop REST APIs in Node and get them connected to your data. StrongLoop also features built-in mBaaS features like push and offline sync, plus graphical tools for clustering, profiling and monitoring Node apps.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="row">
-
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="well powered-by-well">
+            <div class="row">
+              <div class="col-md-4">
+                <img alt="Node.js" src="../img/angularjs.png"/>
+              </div>
+              <div class="col-md-8">
+                <p class="powered-by-desc">
+                  <strong>AngularJS</strong>
+                  is a toolset for building the framework most suited to your application development. It is fully extensible and works well with other libraries. Also lets you extend HTML vocabulary for your application.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="row">
-
+        <div class="col-md-6">
+          <div class="well powered-by-well">
+            <div class="row">
+              <div class="col-md-4">
+                <img alt="Node.js" src="../img/mongoDB.png"/>
+              </div>
+              <div class="col-md-8">
+                <p class="powered-by-desc">
+                  <strong>MongoDB</strong>
+                  is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB eschews the traditional table-based relational database structure, making the integration of data in certain types of applications easier and faster.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="row">
-
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="well powered-by-well">
+            <div class="row">
+              <div class="col-md-4">
+                <img alt="Node.js" src="../img/mysql.png"/>
+              </div>
+              <div class="col-md-8">
+                <p class="powered-by-desc">
+                  <strong>MySQL</strong>
+                  is an open source relational database management system (RDBMS) based on Structured Query Language (SQL). It's the world's most popular open source database. With its proven performance, reliability and ease-of-use, MySQL has become the leading database choice for web-based applications.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="well powered-by-well">
+            <div class="row">
+              <div class="col-md-4">
+                <img alt="Node.js" src="../img/gojs.png"/>
+              </div>
+              <div class="col-md-8">
+                <p class="powered-by-desc">
+                  <strong>GoJS</strong>
+                  is a feature-rich JavaScript library for implementing interactive diagrams across modern web browsers and platforms. GoJS makes constructing diagrams of complex nodes, links, and groups easy with customizable templates and layouts.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <h1 class="title">Example</h1>
-      <div class="" style="width: auto; height: 500px;"></div>
+      <h1 class="title">Try it!</h1>
+      <div id="tryIt" class="well try-it-well" ng-controller="example">
+        <div class="" id="myDiagram" style="width: auto; height: 500px;"></div>
+      </div>
     </div>
   </div>
 </main>
+
 <footer class="mdl-mini-footer register-page">
   <div class="mdl-mini-footer__left-section">
     <div class="mdl-logo">CDG System .co.ltd</div>

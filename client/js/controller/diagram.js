@@ -3,11 +3,11 @@
 
   angular.module('app')
     .controller("diagramCtrl", ['$scope', '$rootScope', 'GoJS', 'Upload', '$log',
-      'DiagramServices', 'Modal', '$http', '$location', diagramCtrl
+      'DiagramServices', 'Modal', '$http', '$location', 'Flash', diagramCtrl
     ]);
 
   function diagramCtrl($scope, $rootScope, GoJS, Upload, $log, DiagramServices,
-     Modal, $http, $location) {
+     Modal, $http, $location, Flash) {
 
     $scope.init = GoJS.initDiagram();
     $scope.diagramList;
@@ -39,10 +39,11 @@
     loadDiagramList();
 
     function saveNewDiagram(myDiagram){
-      $log.info(myDiagram);
+      var saveMessage = 'Save "'+ myDiagram.diagramName + '" successful.';
       DiagramServices.createDiagram(myDiagram, function(){
         loadDiagramList();
         closeModal();
+        Flash.create('success', saveMessage, 'flash-custom-class');
       });
     }
     function saveDiagram(myDiagram){
@@ -50,9 +51,11 @@
         $scope.modal.save = !$scope.modal.save;
         $scope.modal.overlay = !$scope.modal.overlay;
       }else {
+        var saveMessage = 'Save "'+ myDiagram.diagramName + '" successful.';
         $log.info("in save diagram",myDiagram);
         DiagramServices.updateDiagram(myDiagram, function(){
           loadDiagramList();
+          Flash.create('success', saveMessage, 'flash-custom-class');
         });
       }
     }
@@ -67,7 +70,7 @@
       $scope.modal = Modal.closeModal();
     }
     function loadDiagramList(){
-      $log.info("in load diagram list",$scope.myDiagram);
+      $log.info("in load diagram list",$rootScope.userName);
       DiagramServices.loadDiagramList($scope.myDiagram.userName, function(result) {
         $scope.diagramList = result;
       });
@@ -81,11 +84,13 @@
       $scope.temp.diagramName = diagramParam.diagramName;
     }
     function deleteDiagram(diagramParam){
+      var deleteMessage = 'Delete "'+ diagramParam.diagramName + '" successful.';
       var c = confirm("delete "+diagramParam.diagramName+" ?");
       if (c) {
         DiagramServices.deleteDiagram(diagramParam.diagramId, function(result){
           $log.info(result);
           loadDiagramList();
+          Flash.create('success', deleteMessage, 'flash-custom-class');
         });
       }
     }

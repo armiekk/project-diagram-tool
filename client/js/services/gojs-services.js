@@ -18,7 +18,7 @@
 
     function initDiagram() {
       diagram =
-        gojs(go.Diagram, "erDiagram", {
+        gojs(go.Diagram, "myDiagram", {
           grid: gojs(go.Panel, "Grid",
             gojs(go.Shape, "LineH", {
               stroke: "lightgray",

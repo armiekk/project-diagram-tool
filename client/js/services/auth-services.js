@@ -29,7 +29,7 @@
       User.getCurrent(function(value, responseHeaders) {
         getValueBack(value.username);
       }, function(httpResponse) {
-        $log.info(httpResponse);
+
       });
     }
 

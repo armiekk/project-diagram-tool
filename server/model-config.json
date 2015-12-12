@@ -45,6 +45,8 @@
   },
   "DiatoolsUser": {
     "dataSource": "mysqlDs",
-    "public": true
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   }
 }
