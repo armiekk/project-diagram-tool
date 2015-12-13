@@ -47,7 +47,6 @@
       function($rootScope, $state, $log, AuthService, fbServices, $location) {
         getUser();
         $rootScope.$on('$stateChangeStart', function(event, next) {
-          getUser();
           if (next.authenticate && !AuthService.isAuthenticated) {
             event.preventDefault();
             $state.go("home");
@@ -58,7 +57,7 @@
         function getUser() {
           if (AuthService.isAuthenticated) {
             AuthService.getCurrent(function(value) {
-              $rootScope.userName = value;
+              $rootScope.credentials = value;
             });
           }
         }

@@ -3,9 +3,9 @@
 
   angular.module("app")
     .factory("fbServices", ["Facebook", "$state", "$log", "AuthService", "base64",
-    '$rootScope', fbServices]);
+    "$rootScope", "Flash", fbServices]);
 
-  function fbServices(Facebook, $state, $log, AuthService, base64, $rootScope) {
+  function fbServices(Facebook, $state, $log, AuthService, base64, $rootScope, Flash) {
 
     function isConnected(callback) {
       var userIsConnected = false;
@@ -24,6 +24,7 @@
     }
 
     function fbLogin(callbackUser) {
+      var errMsg = "Cannot connect with Facebook!";
       return isConnected(function(status) {
         var emailPattern = "@facebook.com";
         if (!status) {
@@ -35,13 +36,7 @@
                   username: profile.name,
                   password: base64.encode(profile.name + profile.id)
                 };
-                AuthService.register(user).then(function() {
-                  AuthService.login(user)
-                    .then(function(response) {
-                      $rootScope.userName = response.user.username;
-                      $state.go("tools.flowChart");
-                    });
-                });
+
               });
             }
           });
@@ -52,11 +47,17 @@
               username: profile.name,
               password: base64.encode(profile.name + profile.id)
             };
-            AuthService.login(user)
-              .then(function(response) {
-                $rootScope.userName = response.user.username;
+            AuthService.login(user, function(result) {
+              if (result == 401) {
+                Flash.create('success', errMsg, 'flash-register-class');
+              }else {
+                $rootScope.credentials = {
+                  userName: result.user.username,
+                  userId: result.userId
+                };
                 $state.go("tools.flowChart");
-              });
+              }
+            });
           });
         }
       });

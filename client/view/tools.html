@@ -7,7 +7,6 @@
     <nav class="drawer-navigation">
       <a class="drawer-navigation-link" ng-click="closeModal()" ui-sref="tools.flowChart">Flowchart</a>
       <a class="drawer-navigation-link" ng-click="closeModal()" ui-sref="tools.ER">ER Diagram</a>
-      <a class="drawer-navigation-link" ng-click="closeModal()" ui-sref="tools.Prototype">Prototype</a>
     </nav>
   </div>
   <header class="mdl-layout__header">
@@ -21,7 +20,7 @@
       <nav class="mdl-navigation mdl-layout--large-screen-only" ng-controller="authCtrl">
         <!-- navbar link -->
         <div>
-          <strong class="username">{{user}}</strong>
+          <strong class="username">{{credentials.userName}}</strong>
           <a href="" class="logout" ng-click="logout()">Log out <span class="fa fa-sign-out"></span></a>
         </div>
       </nav>

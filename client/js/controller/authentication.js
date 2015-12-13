@@ -3,12 +3,12 @@
 
   angular
     .module("app")
-    .controller("authCtrl", ["$scope", "$rootScope", "AuthService",
-      "$window", "$state", "$log", "fbServices", "Facebook", "$location", authCtrl
+    .controller("authCtrl", ["$scope", "$rootScope", "AuthService", "$window",
+    "$state", "$log", "fbServices", "Facebook", "$location", "Flash", "$timeout", authCtrl
     ]);
 
   function authCtrl($scope, $rootScope, AuthService, $window, $state, $log,
-    fbServices, Facebook, $location) {
+    fbServices, Facebook, $location, Flash, $timeout) {
 
     $scope.user = $rootScope.userName;
     $scope.modal = {
@@ -23,31 +23,40 @@
     $scope.facebookLogin = fbServices.fbLogin;
 
     function register(user) {
-      $scope.passwordMatch = user.password === user.rePassword;
-      if ($scope.passwordMatch) {
-        AuthService.register(user)
-          .then(function() {
-            $window.alert("Register Successful");
+      var scssMsg = "Register Successful";
+      var errMsg = "<strong>Register Unsuccessful!</strong> <br> E-mail or Username has been used.";
+      AuthService.register(user, function(cbMsg) {
+        if (cbMsg === scssMsg) {
+          Flash.create('success', "Register Successful", 'flash-register-class');
+          $timeout(function(){
             $state.go("login");
-          });
-      } else {
-        $window.alert("password not match !");
-      }
+          },3000);
+        } else {
+          Flash.create('success', errMsg, 'flash-register-class');
+        }
+      });
     };
 
     function login(user) {
-      AuthService.login(user)
-        .then(function(response) {
-          $rootScope.userName = response.user.username;
+      var errMsg = "Username or password wrong!";
+      AuthService.login(user, function(result) {
+        if (result == 401) {
+          Flash.create('success', errMsg, 'flash-register-class');
+        }else {
+          $rootScope.credentials = {
+            userName: result.user.username,
+            userId: result.userId
+          };
           $state.go("tools.flowChart");
-        });
+        }
+      });
     }
 
     function logout() {
       AuthService.logout()
         .then(function() {
-          $rootScope.userName = undefined;
           $state.go("home");
+          $rootScope.credentials = undefined;
         });
     }
 

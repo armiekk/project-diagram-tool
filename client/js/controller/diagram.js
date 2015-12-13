@@ -12,13 +12,8 @@
     $scope.init = GoJS.initDiagram();
     $scope.diagramList;
     $scope.temp = {};
-    $scope.myDiagram = {
-      userName: $rootScope.userName,
-      diagramName: "",
-      diagramDetail: [],
-      category: $location.path().split("/")[2]
-    };;
-    $scope.myDiagram.diagramDetail = $scope.init.model;
+    $scope.myDiagram;
+
     $scope.modal = Modal.modalTrigger();
     $scope.uploader = Upload.init();
 
@@ -36,11 +31,26 @@
     $scope.exportImage = exportImage;
     $scope.openDrawer = openDrawer;
 
+    newInstance();
     loadDiagramList();
 
+    function newInstance(){
+      if ($rootScope.credentials !== undefined) {
+        $log.info("new instance.");
+        $scope.myDiagram = {
+          diagramId: undefined,
+          userName: $rootScope.credentials.userName,
+          diagramName: "",
+          diagramDetail: [],
+          category: $location.path().split("/")[2]
+        };
+        $scope.myDiagram.diagramDetail = $scope.init.model;
+      }
+    }
     function saveNewDiagram(myDiagram){
       var saveMessage = 'Save "'+ myDiagram.diagramName + '" successful.';
-      DiagramServices.createDiagram(myDiagram, function(){
+      DiagramServices.createDiagram(myDiagram, function(cbMsg){
+        $log.info(cbMsg);
         loadDiagramList();
         closeModal();
         Flash.create('success', saveMessage, 'flash-custom-class');
@@ -52,8 +62,8 @@
         $scope.modal.overlay = !$scope.modal.overlay;
       }else {
         var saveMessage = 'Save "'+ myDiagram.diagramName + '" successful.';
-        $log.info("in save diagram",myDiagram);
-        DiagramServices.updateDiagram(myDiagram, function(){
+        DiagramServices.updateDiagram(myDiagram, function(cbMsg){
+          $log.info(cbMsg);
           loadDiagramList();
           Flash.create('success', saveMessage, 'flash-custom-class');
         });
@@ -61,6 +71,7 @@
     }
     function newDiagram() {
       $scope.myDiagram.diagramName = "";
+      $scope.myDiagram.diagramId = undefined;
       $scope.init.model = new go.GraphLinksModel();
       $scope.init.model.linkFromPortIdProperty = "fromPort";
       $scope.init.model.linkToPortIdProperty = "toPort";
@@ -70,12 +81,12 @@
       $scope.modal = Modal.closeModal();
     }
     function loadDiagramList(){
-      $log.info("in load diagram list",$rootScope.userName);
-      DiagramServices.loadDiagramList($scope.myDiagram.userName, function(result) {
+      DiagramServices.loadDiagramList($rootScope.credentials.userId, function(result) {
         $scope.diagramList = result;
       });
     }
     function loadDiagram(diagramParam){
+      $scope.myDiagram.diagramId = diagramParam.diagramId;
       $scope.myDiagram.diagramName = diagramParam.diagramName;
       $scope.myDiagram.diagramDetail = $scope.init.model = go.Model.fromJson(diagramParam.diagramDetail);
     }
@@ -87,8 +98,8 @@
       var deleteMessage = 'Delete "'+ diagramParam.diagramName + '" successful.';
       var c = confirm("delete "+diagramParam.diagramName+" ?");
       if (c) {
-        DiagramServices.deleteDiagram(diagramParam.diagramId, function(result){
-          $log.info(result);
+        DiagramServices.deleteDiagram(diagramParam.diagramId, function(cbMsg){
+          $log.info(cbMsg);
           loadDiagramList();
           Flash.create('success', deleteMessage, 'flash-custom-class');
         });

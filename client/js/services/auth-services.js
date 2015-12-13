@@ -7,10 +7,13 @@
 
   function AuthService(User, $q, $rootScope, $log) {
 
-    function login(user) {
+    function login(user, callback) {
       return User
-        .login(user)
-        .$promise;
+        .login(user, function(value, responseHeaders){
+          callback(value);
+        }, function(httpResponse){
+          callback(httpResponse.status);
+        });
     }
 
     function logout() {
@@ -19,15 +22,23 @@
         .$promise;
     }
 
-    function register(user) {
-      return User
-        .create(user)
-        .$promise;
+    function register(user, callback) {
+      User.create(user, function(value, responseHeaders) {
+        callback("Register Successful");
+        $log.info("register Successful", value);
+      }, function(httpResponse){
+        $log.info("register error", httpResponse);
+        callback("Register Unsuccessful");
+      });
     }
 
     function getCurrent(getValueBack) {
       User.getCurrent(function(value, responseHeaders) {
-        getValueBack(value.username);
+        var credentials = {
+          userName: value.username,
+          userId: value.userId
+        };
+        getValueBack(credentials);
       }, function(httpResponse) {
 
       });

@@ -1131,6 +1131,12 @@ module.factory(
       { 'id': '@id' },
       {
 
+        // INTERNAL. Use Diagram.diatoolsUser() instead.
+        "prototype$__get__diatoolsUser": {
+          url: urlBase + "/Diagrams/:id/diatoolsUser",
+          method: "GET"
+        },
+
         /**
          * @ngdoc method
          * @name lbServices.Diagram#create
@@ -1552,6 +1558,65 @@ module.factory(
           url: urlBase + "/Diagrams/change-stream",
           method: "POST"
         },
+
+        // INTERNAL. Use DiatoolsUser.diagrams.findById() instead.
+        "::findById::DiatoolsUser::diagrams": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/DiatoolsUsers/:id/diagrams/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use DiatoolsUser.diagrams.destroyById() instead.
+        "::destroyById::DiatoolsUser::diagrams": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/DiatoolsUsers/:id/diagrams/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use DiatoolsUser.diagrams.updateById() instead.
+        "::updateById::DiatoolsUser::diagrams": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/DiatoolsUsers/:id/diagrams/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use DiatoolsUser.diagrams() instead.
+        "::get::DiatoolsUser::diagrams": {
+          isArray: true,
+          url: urlBase + "/DiatoolsUsers/:id/diagrams",
+          method: "GET"
+        },
+
+        // INTERNAL. Use DiatoolsUser.diagrams.create() instead.
+        "::create::DiatoolsUser::diagrams": {
+          url: urlBase + "/DiatoolsUsers/:id/diagrams",
+          method: "POST"
+        },
+
+        // INTERNAL. Use DiatoolsUser.diagrams.createMany() instead.
+        "::createMany::DiatoolsUser::diagrams": {
+          isArray: true,
+          url: urlBase + "/DiatoolsUsers/:id/diagrams",
+          method: "POST"
+        },
+
+        // INTERNAL. Use DiatoolsUser.diagrams.destroyAll() instead.
+        "::delete::DiatoolsUser::diagrams": {
+          url: urlBase + "/DiatoolsUsers/:id/diagrams",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use DiatoolsUser.diagrams.count() instead.
+        "::count::DiatoolsUser::diagrams": {
+          url: urlBase + "/DiatoolsUsers/:id/diagrams/count",
+          method: "GET"
+        },
       }
     );
 
@@ -1694,6 +1759,42 @@ module.factory(
     */
     R.modelName = "Diagram";
 
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Diagram#diatoolsUser
+         * @methodOf lbServices.Diagram
+         *
+         * @description
+         *
+         * Fetches belongsTo relation diatoolsUser.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `DiatoolsUser` object.)
+         * </em>
+         */
+        R.diatoolsUser = function() {
+          var TargetResource = $injector.get("DiatoolsUser");
+          var action = TargetResource["::get::Diagram::diatoolsUser"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);
@@ -2214,6 +2315,33 @@ module.factory(
           method: "PUT"
         },
 
+        // INTERNAL. Use DiatoolsUser.diagrams.findById() instead.
+        "prototype$__findById__diagrams": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/DiatoolsUsers/:id/diagrams/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use DiatoolsUser.diagrams.destroyById() instead.
+        "prototype$__destroyById__diagrams": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/DiatoolsUsers/:id/diagrams/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use DiatoolsUser.diagrams.updateById() instead.
+        "prototype$__updateById__diagrams": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/DiatoolsUsers/:id/diagrams/:fk",
+          method: "PUT"
+        },
+
         /**
          * @ngdoc method
          * @name lbServices.DiatoolsUser#prototype$__get__accessTokens
@@ -2348,6 +2476,31 @@ module.factory(
          */
         "prototype$__count__accessTokens": {
           url: urlBase + "/DiatoolsUsers/:id/accessTokens/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use DiatoolsUser.diagrams() instead.
+        "prototype$__get__diagrams": {
+          isArray: true,
+          url: urlBase + "/DiatoolsUsers/:id/diagrams",
+          method: "GET"
+        },
+
+        // INTERNAL. Use DiatoolsUser.diagrams.create() instead.
+        "prototype$__create__diagrams": {
+          url: urlBase + "/DiatoolsUsers/:id/diagrams",
+          method: "POST"
+        },
+
+        // INTERNAL. Use DiatoolsUser.diagrams.destroyAll() instead.
+        "prototype$__delete__diagrams": {
+          url: urlBase + "/DiatoolsUsers/:id/diagrams",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use DiatoolsUser.diagrams.count() instead.
+        "prototype$__count__diagrams": {
+          url: urlBase + "/DiatoolsUsers/:id/diagrams/count",
           method: "GET"
         },
 
@@ -2940,6 +3093,12 @@ module.factory(
           method: "POST"
         },
 
+        // INTERNAL. Use Diagram.diatoolsUser() instead.
+        "::get::Diagram::diatoolsUser": {
+          url: urlBase + "/Diagrams/:id/diatoolsUser",
+          method: "GET"
+        },
+
         /**
          * @ngdoc method
          * @name lbServices.DiatoolsUser#getCurrent
@@ -3161,6 +3320,307 @@ module.factory(
     */
     R.modelName = "DiatoolsUser";
 
+    /**
+     * @ngdoc object
+     * @name lbServices.DiatoolsUser.diagrams
+     * @header lbServices.DiatoolsUser.diagrams
+     * @object
+     * @description
+     *
+     * The object `DiatoolsUser.diagrams` groups methods
+     * manipulating `Diagram` instances related to `DiatoolsUser`.
+     *
+     * Call {@link lbServices.DiatoolsUser#diagrams DiatoolsUser.diagrams()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.DiatoolsUser#diagrams
+         * @methodOf lbServices.DiatoolsUser
+         *
+         * @description
+         *
+         * Queries diagrams of DiatoolsUser.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Diagram` object.)
+         * </em>
+         */
+        R.diagrams = function() {
+          var TargetResource = $injector.get("Diagram");
+          var action = TargetResource["::get::DiatoolsUser::diagrams"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.DiatoolsUser.diagrams#count
+         * @methodOf lbServices.DiatoolsUser.diagrams
+         *
+         * @description
+         *
+         * Counts diagrams of DiatoolsUser.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.diagrams.count = function() {
+          var TargetResource = $injector.get("Diagram");
+          var action = TargetResource["::count::DiatoolsUser::diagrams"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.DiatoolsUser.diagrams#create
+         * @methodOf lbServices.DiatoolsUser.diagrams
+         *
+         * @description
+         *
+         * Creates a new instance in diagrams of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Diagram` object.)
+         * </em>
+         */
+        R.diagrams.create = function() {
+          var TargetResource = $injector.get("Diagram");
+          var action = TargetResource["::create::DiatoolsUser::diagrams"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.DiatoolsUser.diagrams#createMany
+         * @methodOf lbServices.DiatoolsUser.diagrams
+         *
+         * @description
+         *
+         * Creates a new instance in diagrams of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Diagram` object.)
+         * </em>
+         */
+        R.diagrams.createMany = function() {
+          var TargetResource = $injector.get("Diagram");
+          var action = TargetResource["::createMany::DiatoolsUser::diagrams"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.DiatoolsUser.diagrams#destroyAll
+         * @methodOf lbServices.DiatoolsUser.diagrams
+         *
+         * @description
+         *
+         * Deletes all diagrams of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.diagrams.destroyAll = function() {
+          var TargetResource = $injector.get("Diagram");
+          var action = TargetResource["::delete::DiatoolsUser::diagrams"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.DiatoolsUser.diagrams#destroyById
+         * @methodOf lbServices.DiatoolsUser.diagrams
+         *
+         * @description
+         *
+         * Delete a related item by id for diagrams.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for diagrams
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.diagrams.destroyById = function() {
+          var TargetResource = $injector.get("Diagram");
+          var action = TargetResource["::destroyById::DiatoolsUser::diagrams"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.DiatoolsUser.diagrams#findById
+         * @methodOf lbServices.DiatoolsUser.diagrams
+         *
+         * @description
+         *
+         * Find a related item by id for diagrams.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for diagrams
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Diagram` object.)
+         * </em>
+         */
+        R.diagrams.findById = function() {
+          var TargetResource = $injector.get("Diagram");
+          var action = TargetResource["::findById::DiatoolsUser::diagrams"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.DiatoolsUser.diagrams#updateById
+         * @methodOf lbServices.DiatoolsUser.diagrams
+         *
+         * @description
+         *
+         * Update a related item by id for diagrams.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - User id
+         *
+         *  - `fk` – `{*}` - Foreign key for diagrams
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Diagram` object.)
+         * </em>
+         */
+        R.diagrams.updateById = function() {
+          var TargetResource = $injector.get("Diagram");
+          var action = TargetResource["::updateById::DiatoolsUser::diagrams"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);

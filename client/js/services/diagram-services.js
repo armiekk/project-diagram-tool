@@ -2,33 +2,28 @@
   'use_strict';
 
   angular.module('app')
-    .factory('DiagramServices', ['$rootScope', '$log', '$window', 'Diagram',
+    .factory('DiagramServices', ['$rootScope', '$log', '$window', 'DiatoolsUser',
     'GoJS', 'SaveFile', diagram]);
 
-    function diagram($rootScope, $log, $window, Diagram, GoJS, SaveFile){
+    function diagram($rootScope, $log, $window, User, GoJS, SaveFile){
+
 
 
       function createDiagram(diagramParam, callback){
+        var userId = $rootScope.credentials.userId;
         diagramParam.diagramDetail = JSON.parse(diagramParam.diagramDetail.toJson());
-        $log.info("in service", diagramParam);
-        Diagram.create(diagramParam, function(value, responseHeaders){
-          callback();
+        User.diagrams.create({ id: userId },diagramParam, function(value, responseHeaders){
+          callback("create diagram successful");
         }, function(httpResponse){
-          $log.info("cannot create diagram",httpResponse);
+          $log.info("cannot create diagram");
         });
       }
 
-      function loadDiagramList(userParam, callback) {
-        Diagram.find({
-          filter: {
-            where: {
-              userName : userParam
-            }
-          }
-        }, function(listValue, responseHeaders){
-          callback(listValue);
+      function loadDiagramList(idParam, callback) {
+        User.diagrams({ id: idParam }, function(value, responseHeaders){
+          callback(value);
         }, function(httpResponse){
-          $log.info("error with load diagram list",httpResponse);
+          $log.info("load diagram list error");
         });
       }
 
@@ -51,26 +46,26 @@
       }
 
       function updateDiagram(diagramParam, callback){
-        Diagram.update({
-          where: {
-            and: [{userName: diagramParam.userName}, {diagramName: diagramParam.diagramName}]
-          }
-        }, diagramParam,
-        function(value, responseHeaders){
-          $log.info("in update successful");
-          callback();
-        }, function(httpResponse){
-          $log.info(httpResponse);
-        });
+        var userId = $rootScope.credentials.userId;
+        User.diagrams.updateById(
+          { id: userId, fk: diagramParam.diagramId },
+          diagramParam, function(value, responseHeaders){
+            callback("update successful");
+          }, function(httpResponse){
+            callback("update unsuccessful");
+          });
+
       }
 
       function deleteDiagram(diagramId, callback){
-        Diagram.deleteById({ id: diagramId },
+        var userId = $rootScope.credentials.userId;
+        User.diagrams.destroyById(
+          { id: userId },
+          { fk: diagramId },
           function(value, responseHeaders){
-            callback("delete successful");
-          },
-          function(httpResponse){
-            callback("delete unsuccessful");
+            callback("delete diagram successful");
+          }, function(httpResponse){
+            callback("delete diagram unsuccessful");
           });
       }
 
