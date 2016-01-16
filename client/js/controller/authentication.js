@@ -27,7 +27,7 @@
       var errMsg = "<strong>Register Unsuccessful!</strong> <br> E-mail or Username has been used.";
       AuthService.register(user, function(cbMsg) {
         if (cbMsg === scssMsg) {
-          Flash.create('success', "Register Successful", 'flash-register-class');
+          Flash.create('success', scssMsg, 'flash-register-class');
           $timeout(function(){
             $state.go("login");
           },3000);

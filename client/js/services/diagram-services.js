@@ -27,28 +27,32 @@
         });
       }
 
-      function exportJSON(diagramParam) {
-        SaveFile.saveJson(diagramParam.diagramName, diagramParam.diagramDetail);
+      function exportJSON(exportName, diagramParam) {
+        SaveFile.saveJson(exportName, diagramParam.diagramDetail);
       }
 
-      function exportImage(diagramParam, init) {
+      function exportImage(exportName, canvas, init) {
         var imageDetail = init.makeImage({
           scale: 1,
           background: "rgba(255, 255 ,255, 1)",
           type: "image/png"
         });
-        var canvas = document.createElement('canvas');
         canvas.width = imageDetail.width, canvas.height = imageDetail.height;
         context = canvas.getContext('2d');
         context.drawImage(imageDetail, 0, 0);
         $log.info("canvas",canvas);
-        SaveFile.saveImage(diagramParam.diagramName, canvas);
+        SaveFile.saveImage(exportName, canvas);
       }
 
       function updateDiagram(diagramParam, callback){
-        var userId = $rootScope.credentials.userId;
+        var query = {
+          id: $rootScope.credentials.userId,
+          fk: diagramParam.diagramId
+        };
+        diagramParam.diagramDetail = JSON.parse(diagramParam.diagramDetail.toJson());
+        delete diagramParam.diagramId;
         User.diagrams.updateById(
-          { id: userId, fk: diagramParam.diagramId },
+          query,
           diagramParam, function(value, responseHeaders){
             callback("update successful");
           }, function(httpResponse){

@@ -6,7 +6,7 @@
     </div>
     <nav class="drawer-navigation">
       <a class="drawer-navigation-link" ng-click="closeModal()" ui-sref="tools.flowChart">Flowchart</a>
-      <a class="drawer-navigation-link" ng-click="closeModal()" ui-sref="tools.ER">ER Diagram</a>
+      <a class="drawer-navigation-link" ng-click="closeModal()" ui-sref="tools.useCase">Use Case</a>
     </nav>
   </div>
   <header class="mdl-layout__header">
@@ -92,13 +92,13 @@
             <div class="panel-body">
               <strong>Export as...</strong>
               <div class="form-group">
-                <input type="text" ng-model="myDiagram.diagramName" class="form-control" name="exportName">
+                <input type="text" ng-model="exportName" class="form-control" name="exportName">
               </div>
               <div class="pull-right">
                 <button type="button"
                         class="btn btn-primary btn-sm"
                         name="button"
-                        ng-click="exportJSON(myDiagram)">export</button>
+                        ng-click="exportJSON(exportName, myDiagram)">export</button>
                 <button type="button"
                         class="btn btn-link btn-sm btn-cancel"
                         name="button"
@@ -115,13 +115,13 @@
             <div class="panel-body">
               <strong>Export as...</strong>
               <div class="form-group">
-                <input type="text" ng-model="myDiagram.diagramName" class="form-control" name="exportName">
+                <input type="text" ng-model="exportName" class="form-control" name="exportName">
               </div>
               <div class="pull-right">
                 <button type="button"
                         class="btn btn-primary btn-sm"
                         name="button"
-                        ng-click="exportImage(myDiagram, init)">export</button>
+                        ng-click="exportImage(exportName, init)">export</button>
                 <button type="button"
                         class="btn btn-link btn-sm btn-cancel"
                         name="button"

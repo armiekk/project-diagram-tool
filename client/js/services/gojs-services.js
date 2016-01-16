@@ -43,6 +43,7 @@
           allowDrop: true,
           "animationManager.duration": 800,
           "undoManager.isEnabled": true,
+          "draggingTool.dragsLink": true,
           "draggingTool.isGridSnapEnabled": true
         });
 

@@ -4,7 +4,7 @@
   angular.module('app')
     .config(function($stateProvider, $urlRouterProvider, $locationProvider, FacebookProvider) {
 
-      FacebookProvider.init("949380818479862");
+      FacebookProvider.init("673279242812089");
 
       $urlRouterProvider.otherwise("/");
 
@@ -36,9 +36,9 @@
           template: "<flowchart-diagram></flowchart-diagram>",
           authenticate: true
         })
-        .state('tools.ER', {
-          url: "/ER",
-          template: "<er-diagram></er-diagram>",
+        .state('tools.useCase', {
+          url: "/useCase",
+          template: "<usecase-diagram></usecase-diagram>",
           authenticate: true
         });
       $locationProvider.html5Mode(true);

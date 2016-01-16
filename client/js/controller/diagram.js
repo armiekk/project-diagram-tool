@@ -3,17 +3,17 @@
 
   angular.module('app')
     .controller("diagramCtrl", ['$scope', '$rootScope', 'GoJS', 'Upload', '$log',
-      'DiagramServices', 'Modal', '$http', '$location', 'Flash', diagramCtrl
+      'DiagramServices', 'Modal', '$http', '$location', 'Flash', 'AuthService', diagramCtrl
     ]);
 
   function diagramCtrl($scope, $rootScope, GoJS, Upload, $log, DiagramServices,
-     Modal, $http, $location, Flash) {
+     Modal, $http, $location, Flash, AuthService) {
 
     $scope.init = GoJS.initDiagram();
     $scope.diagramList;
     $scope.temp = {};
+    $scope.exportName = "new Diagram";
     $scope.myDiagram;
-
     $scope.modal = Modal.modalTrigger();
     $scope.uploader = Upload.init();
 
@@ -31,27 +31,29 @@
     $scope.exportImage = exportImage;
     $scope.openDrawer = openDrawer;
 
-    newInstance();
-    loadDiagramList();
+    getUser();
 
-    function newInstance(){
-      if ($rootScope.credentials !== undefined) {
-        $log.info("new instance.");
-        $scope.myDiagram = {
-          diagramId: undefined,
-          userName: $rootScope.credentials.userName,
-          diagramName: "",
-          diagramDetail: [],
-          category: $location.path().split("/")[2]
-        };
-        $scope.myDiagram.diagramDetail = $scope.init.model;
+    function getUser() {
+      if (AuthService.isAuthenticated) {
+        AuthService.getCurrent(function(value) {
+          $log.info("new instance.");
+          $scope.myDiagram = {
+            diagramId: undefined,
+            userName: value.userName,
+            diagramName: "",
+            diagramDetail: [],
+            category: $location.path().split("/")[2]
+          };
+          $scope.myDiagram.diagramDetail = $scope.init.model;
+          loadDiagramList(value.userId);
+        });
       }
     }
     function saveNewDiagram(myDiagram){
       var saveMessage = 'Save "'+ myDiagram.diagramName + '" successful.';
       DiagramServices.createDiagram(myDiagram, function(cbMsg){
         $log.info(cbMsg);
-        loadDiagramList();
+        loadDiagramList($rootScope.credentials.userId);
         closeModal();
         Flash.create('success', saveMessage, 'flash-custom-class');
       });
@@ -64,7 +66,7 @@
         var saveMessage = 'Save "'+ myDiagram.diagramName + '" successful.';
         DiagramServices.updateDiagram(myDiagram, function(cbMsg){
           $log.info(cbMsg);
-          loadDiagramList();
+          loadDiagramList($rootScope.credentials.userId);
           Flash.create('success', saveMessage, 'flash-custom-class');
         });
       }
@@ -80,12 +82,14 @@
     function closeModal(){
       $scope.modal = Modal.closeModal();
     }
-    function loadDiagramList(){
-      DiagramServices.loadDiagramList($rootScope.credentials.userId, function(result) {
+    function loadDiagramList(userId){
+      $log.info("userId",userId);
+      DiagramServices.loadDiagramList(userId, function(result) {
         $scope.diagramList = result;
       });
     }
     function loadDiagram(diagramParam){
+      $scope.exportName = diagramParam.diagramName;
       $scope.myDiagram.diagramId = diagramParam.diagramId;
       $scope.myDiagram.diagramName = diagramParam.diagramName;
       $scope.myDiagram.diagramDetail = $scope.init.model = go.Model.fromJson(diagramParam.diagramDetail);
@@ -100,7 +104,7 @@
       if (c) {
         DiagramServices.deleteDiagram(diagramParam.diagramId, function(cbMsg){
           $log.info(cbMsg);
-          loadDiagramList();
+          loadDiagramList($rootScope.credentials.userId);
           Flash.create('success', deleteMessage, 'flash-custom-class');
         });
       }
@@ -111,12 +115,15 @@
     function undo(diagram){
       $scope.myDiagram.diagramDetail = GoJS.undo(diagram);
     }
-    function exportJSON(myDiagram){
-      DiagramServices.exportJSON(myDiagram);
+    function exportJSON(exportName, myDiagram){
+      $scope.exportName = "new Diagram";
+      DiagramServices.exportJSON(exportName, myDiagram);
       closeModal();
     }
-    function exportImage(myDiagram, init){
-      DiagramServices.exportImage(myDiagram, init);
+    function exportImage(exportName, init){
+      $scope.exportName = "new Diagram";
+      var canvas = document.createElement('canvas');
+      DiagramServices.exportImage(exportName, canvas, init);
       closeModal();
     }
     function onUploadComplete(item, response, status, headers) {

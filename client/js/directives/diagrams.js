@@ -4,7 +4,7 @@
   angular
     .module("app")
     .directive("flowchartDiagram", flowchartDiagram)
-    .directive("erDiagram", erDiagram);
+    .directive("usecaseDiagram", usecaseDiagram);
 
   function flowchartDiagram() {
 
@@ -341,7 +341,7 @@
 
         // initialize the Palette that is on the left side of the page
         scope.myPalette =
-          scope.g(go.Palette, "erPalette", // must name or refer to the DIV HTML element
+          scope.g(go.Palette, "palette", // must name or refer to the DIV HTML element
             {
               "animationManager.duration": 800, // slightly longer than default (600ms) animation
               nodeTemplateMap: diagram.nodeTemplateMap, // share the templates used by myDiagram
@@ -380,14 +380,14 @@
       restrict: "E",
       scope: false,
       link: flowchart,
-      template: '<div class="panel-body" id="erPalette" style="width: Auto; height: 500px;"></div>',
+      template: '<div class="panel-body" id="palette" style="width: Auto; height: 500px;"></div>',
 
     }
   }
 
-  function erDiagram() {
+  function usecaseDiagram() {
 
-    var flowchart = function(scope, elmt, attrs) {
+    var useCase = function(scope, elmt, attrs) {
 
       initGojs();
 
@@ -492,12 +492,9 @@
           ];
         }
 
-        // Define a function for creating a "port" that is normally transparent.
-        // The "name" is used as the GraphObject.portId, the "spot" is used to control how links connect
-        // and where the port is positioned on the node, and the boolean "output" and "input" arguments
-        // control whether the user can draw links from or to the port.
+
         function makePort(name, spot, output, input) {
-          // the port is basically just a small circle that has a white stroke when it is made visible
+
           return scope.g(go.Shape, "Circle", {
             fill: "transparent",
             stroke: null, // this is changed to "white" in the showPorts function
@@ -520,30 +517,33 @@
 
         var lightText = 'whitesmoke';
 
-        diagram.nodeTemplateMap.add("",
+        diagram.nodeTemplateMap.add("Actor",
           // the default category
           scope.g(go.Node, "Spot", nodeStyle(), {
               selectable: true,
               selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
             }, {
               resizable: true,
-              resizeObjectName: "PANEL",
+              resizeObjectName: "ACTOR",
               resizeAdornmentTemplate: nodeResizeAdornmentTemplate
             },
             // the main object is a Panel that surrounds a TextBlock with a rectangular Shape
-            scope.g(go.Panel, "Auto", {
+            scope.g(go.Panel, "Spot", {
                 name: "PANEL"
               },
               new go.Binding("desiredSize", "size", go.Size.parse).makeTwoWay(go.Size.stringify),
-              scope.g(go.Shape, "Rectangle", {
-                  fill: "#FAFAFA",
-                  stroke: "#212121"
-                },
-                new go.Binding("figure", "figure")),
+              scope.g(go.Shape, "Actor", {
+                name: "ACTOR",
+                fill: "#FAFAFA",
+                stroke: "#212121",
+                width: 40,
+                height: 70,
+                minSize: new go.Size(40, 70)
+              }),
               scope.g(go.TextBlock, {
                   font: "bold 11pt Helvetica, Arial, sans-serif",
                   stroke: "#212121",
-                  margin: 8,
+                  alignment: new go.Spot(0.5, 1.15),
                   maxSize: new go.Size(160, NaN),
                   wrap: go.TextBlock.WrapFit,
                   editable: true
@@ -557,21 +557,24 @@
             makePort("B", go.Spot.Bottom, true, false)
           ));
 
-        diagram.nodeTemplateMap.add("Attribute",
+        diagram.nodeTemplateMap.add("UseCase",
           scope.g(go.Node, "Auto", nodeStyle(), {
               selectable: true,
               selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
             }, {
               resizable: true,
-              resizeObjectName: "PANEL",
+              resizeObjectName: "USECASE",
               resizeAdornmentTemplate: nodeResizeAdornmentTemplate
             },
             scope.g(go.Panel, "Auto", {
                 name: "PANEL"
               },
               scope.g(go.Shape, "Ellipse", {
+                name: "USECASE",
                 fill: "#FAFAFA",
                 stroke: "#212121",
+                width: 120,
+                height: 50,
                 minSize: new go.Size(120, 50)
               }),
               scope.g(go.TextBlock, {
@@ -589,6 +592,39 @@
             makePort("L", go.Spot.Left, true, true),
             makePort("R", go.Spot.Right, true, true),
             makePort("B", go.Spot.Bottom, true, false)
+          ));
+
+        diagram.nodeTemplateMap.add("System",
+          scope.g(go.Node, "Spot", nodeStyle(), {
+              selectable: true,
+              selectionAdornmentTemplate: nodeSelectionAdornmentTemplate
+            }, {
+              resizable: true,
+              resizeObjectName: "SYSTEM",
+              resizeAdornmentTemplate: nodeSelectionAdornmentTemplate
+            },
+            scope.g(go.Panel, "Spot",
+              new go.Binding("desiredSize", "size", go.Size.parse).makeTwoWay(go.Size.stringify),
+              scope.g(go.Shape, "Square", {
+                name: "SYSTEM",
+                fill: "#FAFAFA",
+                stroke: "#212121",
+                width: 150,
+                height: 150,
+                minSize: new go.Size(150, 150)
+              }),
+              scope.g(go.TextBlock, {
+                  font: "bold 11pt Helvetica, Arial, sans-serif",
+                  stroke: "#212121",
+                  width: 100,
+                  height: 20,
+                  alignment: new go.Spot(0.5, -0.1),
+                  maxSize: new go.Size(160, NaN),
+                  wrap: go.TextBlock.WrapFit,
+                  editable: true
+                },
+                new go.Binding("text").makeTwoWay())
+            )
           ));
 
         diagram.nodeTemplateMap.add("Comment",
@@ -620,67 +656,36 @@
 
         // replace the default Link template in the linkTemplateMap
         diagram.linkTemplate =
-          scope.g(go.Link, // the whole link panel
+      scope.g(go.Link,  // the whole link panel
+        { selectable: true},
+        { relinkableFrom: true, relinkableTo: true, reshapable: true },
+        {
+          routing: go.Link.AvoidsNodes,
+          curve: go.Link.JumpOver,
+          corner: 5,
+          toShortLength: 4
+        },
+        new go.Binding("points").makeTwoWay(),
+        scope.g(go.Shape,  // the link path shape
+          { isPanelMain: true, strokeWidth: 2 }),
+        scope.g(go.Shape,  // the arrowhead
+          { toArrow: "Standard", stroke: null }),
+        scope.g(go.Panel, "Auto",
+          new go.Binding("visible", "isSelected").ofObject(),
+          scope.g(go.Shape, "RoundedRectangle",  // the link shape
+            { fill: "#F8F8F8", stroke: null }),
+          scope.g(go.TextBlock,
             {
-              routing: go.Link.AvoidsNodes,
-              curve: go.Link.JumpOver,
-              corner: 5,
-              toShortLength: 4,
-              relinkableFrom: true,
-              relinkableTo: true,
-              reshapable: true,
-              resegmentable: true,
-              // mouse-overs subtly highlight links:
-              mouseEnter: function(e, link) {
-                link.findObject("HIGHLIGHT").stroke = "rgba(30,144,255,0.2)";
-              },
-              mouseLeave: function(e, link) {
-                link.findObject("HIGHLIGHT").stroke = "transparent";
-              }
+              textAlign: "center",
+              font: "10pt helvetica, arial, sans-serif",
+              stroke: "#919191",
+              margin: 2,
+              minSize: new go.Size(10, NaN),
+              editable: true
             },
-            new go.Binding("points").makeTwoWay(),
-            scope.g(go.Shape, // the highlight shape, normally transparent
-              {
-                isPanelMain: true,
-                strokeWidth: 8,
-                stroke: "transparent",
-                name: "HIGHLIGHT"
-              }),
-            scope.g(go.Shape, // the link path shape
-              {
-                isPanelMain: true,
-                stroke: "#212121",
-                strokeWidth: 2
-              }),
-            scope.g(go.Shape, // the arrowhead
-              {
-                toArrow: "standard",
-                stroke: null,
-                fill: "#212121"
-              }),
-            scope.g(go.Panel, "Auto", // the link label, normally not visible
-              {
-                visible: false,
-                name: "LABEL",
-                segmentIndex: 2,
-                segmentFraction: 0.5
-              },
-              new go.Binding("visible", "visible").makeTwoWay(),
-              scope.g(go.Shape, "RoundedRectangle", // the label shape
-                {
-                  fill: "#F8F8F8",
-                  stroke: null
-                }),
-              scope.g(go.TextBlock, "Label", // the label
-                {
-                  textAlign: "center",
-                  font: "10pt helvetica, arial, sans-serif",
-                  stroke: "#333333",
-                  editable: true
-                },
-                new go.Binding("text", "text").makeTwoWay())
-            )
-          );
+            new go.Binding("text").makeTwoWay())
+        )
+      );
 
         // Make link labels visible if coming out of a "conditional" node.
         // This listener is called by the "LinkDrawn" and "LinkRelinked" DiagramEvents.
@@ -696,21 +701,55 @@
 
         // initialize the Palette that is on the left side of the page
         scope.myPalette =
-          scope.g(go.Palette, "erPalette", // must name or refer to the DIV HTML element
+          scope.g(go.Palette, "palette", // must name or refer to the DIV HTML element
             {
               "animationManager.duration": 800, // slightly longer than default (600ms) animation
               nodeTemplateMap: diagram.nodeTemplateMap, // share the templates used by myDiagram
+              linkTemplate: // simplify the link template, just in this Palette
+                scope.g(go.Link,
+                  { // because the GridLayout.alignment is Location and the nodes have locationSpot == Spot.Center,
+                    // to line up the Link in the same manner we have to pretend the Link has the same location spot
+                    locationSpot: go.Spot.Center,
+                    selectionAdornmentTemplate:
+                      scope.g(go.Adornment, "Link",
+                        { locationSpot: go.Spot.Center },
+                        scope.g(go.Shape,
+                          { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 }),
+                        scope.g(go.Shape,  // the arrowhead
+                          { toArrow: "Standard", stroke: null })
+                      )
+                  },
+                  {
+                    routing: go.Link.AvoidsNodes,
+                    curve: go.Link.JumpOver,
+                    corner: 5,
+                    toShortLength: 4
+                  },
+                  new go.Binding("points"),
+                  scope.g(go.Shape,  // the link path shape
+                    { isPanelMain: true, strokeWidth: 2 }),
+                  scope.g(go.Shape,  // the arrowhead
+                    { toArrow: "Standard", stroke: null })
+                ),
+              initialScale: 0.7,
               model: new go.GraphLinksModel([ // specify the contents of the Palette
                 {
-                  category: "Attribute",
-                  text: "Attribute"
+                  category: "UseCase",
+                  text: "Use Case"
                 }, {
-                  text: "Entity"
+                  category: "Actor",
+                  text: "Actor"
+                }, {
+                  category: "System",
+                  text: "System"
                 }, {
                   category: "Comment",
                   text: "Comment"
                 }
-              ])
+              ], [
+            // the Palette also has a disconnected Link, which the user can drag-and-drop
+            { points: new go.List(go.Point).addAll([new go.Point(0, 0), new go.Point(30, 0), new go.Point(30, 40), new go.Point(60, 40)]) }
+          ])
             });
 
 
@@ -728,8 +767,8 @@
     return {
       restrict: "E",
       scope: false,
-      link: flowchart,
-      template: '<div class="panel-body" id="erPalette" style="width: Auto; height: 500px;"></div>',
+      link: useCase,
+      template: '<div class="panel-body" id="palette" style="width: Auto; height: 500px;"></div>',
 
     }
   }

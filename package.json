@@ -33,5 +33,24 @@
     "type": "",
     "url": ""
   },
-  "description": "project-diagram-tool"
+  "description": "project-diagram-tool",
+  "bundleDependencies": [
+    "body-parser",
+    "compression",
+    "cookie-parser",
+    "cors",
+    "express-flash",
+    "express-session",
+    "jsonfile",
+    "loopback",
+    "loopback-boot",
+    "loopback-component-explorer",
+    "loopback-component-passport",
+    "loopback-component-storage",
+    "loopback-connector-mongodb",
+    "loopback-connector-mysql",
+    "loopback-datasource-juggler",
+    "passport-facebook",
+    "serve-favicon"
+  ]
 }
