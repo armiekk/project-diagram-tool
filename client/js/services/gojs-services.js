@@ -7,7 +7,9 @@
 
   function gojsServices() {
 
-    var diagram, gojs = go.GraphObject.make;
+    var diagram;
+
+    var gojs = go.GraphObject.make;
 
     function newDiagram() {
       diagram.model = new go.GraphLinksModel();
@@ -17,7 +19,7 @@
     }
 
     function initDiagram() {
-      diagram =
+    diagram =
         gojs(go.Diagram, "myDiagram", {
           grid: gojs(go.Panel, "Grid",
             gojs(go.Shape, "LineH", {

@@ -1,8 +1,8 @@
+/* global __dirname */
 module.exports = function(app){
   var path = require('path');
   var loopback = require('loopback');
   var bodyParser = require('body-parser');
-  var jsonfile = require('jsonfile');
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));

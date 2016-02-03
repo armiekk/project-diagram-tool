@@ -7,7 +7,7 @@
   },
   "properties": {
     "userId": {
-      "type": "Number",
+      "type": "string",
       "id": true,
       "generated": true
     }

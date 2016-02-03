@@ -44,7 +44,7 @@
     "public": true
   },
   "DiatoolsUser": {
-    "dataSource": "mysqlDs",
+    "dataSource": "mongoDs",
     "public": true,
     "$promise": {},
     "$resolved": true
